@@ -6,17 +6,19 @@
   <title>ФинПитомец</title>
   <style>
     :root {
-      --bg: #FFFBF5;
+      --bg: #F8F7FD;
       --card-bg: #FFFFFF;
       --primary: #6C5CE7;
+      --primary-hover: #5A4BD6;
       --accent-green: #00B894;
       --accent-yellow: #FDCB6E;
       --accent-orange: #E17055;
       --accent-pink: #FD79A8;
+      --accent-blue: #0984E3;
       --text: #2D3436;
-      --text-muted: #8395A7;
-      --border: #F1EFEA;
-      --radius: 24px;
+      --text-muted: #636E72;
+      --border: #ECEAF5;
+      --radius: 20px;
     }
 
     * {
@@ -29,7 +31,7 @@
     }
 
     body {
-      background-color: #DDE3ED;
+      background-color: #DDE2EB;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -39,10 +41,10 @@
     .app-screen {
       width: 100%;
       max-width: 412px;
-      height: 860px;
+      height: 890px;
       background: var(--bg);
-      border-radius: 40px;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+      border-radius: 38px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.16);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -51,7 +53,7 @@
 
     /* Верхняя панель */
     .header {
-      padding: 18px 20px 12px;
+      padding: 16px 18px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,89 +61,128 @@
       z-index: 10;
     }
 
-    .header-title {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--text);
+    .age-switcher {
+      background: #ECE8FB;
+      border-radius: 20px;
+      display: flex;
+      padding: 3px;
     }
 
-    .header-actions {
+    .age-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 11px;
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .age-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .top-icons {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .coin-badge {
       background: #FFFFFF;
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 5px 12px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     .icon-btn {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 1.5px solid var(--border);
-      background: #FFFFFF;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
       cursor: pointer;
     }
 
-    /* Область экранов (переключение вкладок) */
+    /* Контейнер вкладок */
     .tab-content {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 18px 85px;
+      padding: 8px 16px 85px;
       display: none;
     }
 
     .tab-content.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       animation: fadeIn 0.2s ease-out;
     }
 
     .tab-content::-webkit-scrollbar { display: none; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ЭКРАН 1: ПИТОМЕЦ */
-    .pet-hero {
+    /* ВКЛАДКА 1: ПИТОМЕЦ (ДАШБОРД) */
+    .pet-card {
+      background: linear-gradient(135deg, #FFF8ED 0%, #FFFFFF 100%);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid #FFEED6;
+      box-shadow: 0 4px 14px rgba(253, 203, 110, 0.12);
+      position: relative;
+    }
+
+    .speech-bubble {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .pet-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pet-avatar-wrap {
+      width: 105px;
+      height: 105px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 10px 0 20px;
-      position: relative;
-    }
-
-    .pet-halo {
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, #FFEAA7 0%, rgba(255, 234, 167, 0) 70%);
-      border-radius: 50%;
-      position: absolute;
-      top: 15px;
-      z-index: 1;
+      justify-content: center;
     }
 
     .pet-avatar {
-      font-size: 92px;
-      position: relative;
-      z-index: 2;
-      cursor: pointer;
+      font-size: 70px;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -149,113 +190,167 @@
       transform: scale(1.2) rotate(6deg);
     }
 
-    .pet-name-badge {
-      margin-top: 10px;
-      text-align: center;
-      z-index: 2;
+    .pet-name-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 2px;
     }
 
-    .pet-name-badge h2 {
-      font-size: 20px;
+    .pet-balances {
+      flex: 1;
+      margin-left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .balance-badge {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .balance-badge .label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .balance-badge .val {
+      font-size: 13px;
       font-weight: 800;
       color: var(--text);
     }
 
-    .pet-status {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-top: 2px;
+    .quick-transfer-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      padding: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(108, 92, 231, 0.25);
     }
 
-    .card {
+    /* 3 шкалы параметров */
+    .bars-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .stat-pill {
       background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 16px;
+      border-radius: 14px;
+      padding: 8px 10px;
       border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
-      margin-bottom: 14px;
     }
 
-    .level-row {
+    .stat-title {
+      font-size: 10px;
+      font-weight: 800;
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
-    .level-tag {
-      background: var(--accent-yellow);
-      padding: 4px 10px;
-      border-radius: 12px;
-      color: #795548;
-    }
-
-    .stats-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .stat-item-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .stat-bar-track {
-      height: 9px;
-      background: #F1EFEA;
-      border-radius: 6px;
+    .stat-bar {
+      height: 7px;
+      background: #EFEFEF;
+      border-radius: 4px;
       overflow: hidden;
     }
 
-    .stat-bar-fill {
+    .stat-fill {
       height: 100%;
-      border-radius: 6px;
+      border-radius: 4px;
+      transition: width 0.35s ease;
+    }
+
+    /* Активная цель */
+    .goal-card {
+      background: linear-gradient(135deg, #6C5CE7, #8073ED);
+      color: #FFFFFF;
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(108, 92, 231, 0.22);
+    }
+
+    .goal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .goal-track {
+      height: 7px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .goal-prog {
+      height: 100%;
+      background: #55EFC4;
+      border-radius: 4px;
       transition: width 0.4s ease;
     }
 
-    .pet-quick-care {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
+    .goal-sub {
+      font-size: 10px;
+      opacity: 0.9;
     }
 
-    .care-btn {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 12px 6px;
+    /* Быстрый уход */
+    .care-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .care-card-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 10px 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
     }
 
-    .care-btn span:first-child { font-size: 26px; }
-    .care-btn .btn-label { font-size: 11px; font-weight: 700; color: var(--text); }
-    .care-btn .btn-price { font-size: 10px; font-weight: 800; color: var(--accent-orange); }
+    .care-card-btn span:first-child { font-size: 24px; }
+    .care-card-btn .lbl { font-size: 11px; font-weight: 800; color: var(--text); }
+    .care-card-btn .prc { font-size: 10px; font-weight: 800; color: var(--accent-orange); }
 
-    /* ЭКРАН 2: БЮДЖЕТ (50/30/20) */
-    .donut-block {
+    /* ВКЛАДКА 2: БЮДЖЕТ (50/30/20) */
+    .budget-chart-container {
       display: flex;
       align-items: center;
-      gap: 18px;
-      background: #FAF9FE;
-      padding: 16px;
-      border-radius: 18px;
-      margin-bottom: 16px;
+      gap: 16px;
+      background: #FFFFFF;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
     }
 
-    .donut {
-      width: 85px;
-      height: 85px;
+    .donut-chart {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background: conic-gradient(
         var(--accent-green) 0% 50%,
@@ -267,84 +362,87 @@
       justify-content: center;
     }
 
-    .donut::after {
+    .donut-chart::after {
       content: "";
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       background: #FFFFFF;
       border-radius: 50%;
     }
 
-    .budget-slider-card {
-      padding: 14px;
-      border-radius: 16px;
-      margin-bottom: 10px;
+    .budget-legend {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .budget-row-input {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
     }
 
-    .ctrl-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .num-btn {
+    .step-btn {
       width: 32px;
       height: 32px;
       border-radius: 10px;
       border: none;
-      background: #FFFFFF;
+      background: #FAF9FE;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
     }
 
-    /* ЭКРАН 3: МАГАЗИН ПОКУПОК */
+    /* ВКЛАДКА 3: МАГАЗИН */
     .shop-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .shop-item {
-      background: var(--card-bg);
+    .shop-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
       border-radius: 18px;
-      border: 1.5px solid var(--border);
-      padding: 14px;
+      padding: 14px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 4px;
       text-align: center;
-      gap: 6px;
       cursor: pointer;
     }
 
-    .shop-item-icon { font-size: 34px; }
-    .shop-item-name { font-size: 13px; font-weight: 800; color: var(--text); }
-    .shop-item-effect { font-size: 11px; color: var(--accent-green); font-weight: 600; }
-    .shop-item-price {
-      background: #FFF9E6;
-      border-radius: 12px;
-      padding: 4px 10px;
+    .shop-card .icon { font-size: 32px; }
+    .shop-card .name { font-size: 13px; font-weight: 800; color: var(--text); }
+    .shop-card .effect { font-size: 11px; color: var(--accent-green); font-weight: 700; }
+    .shop-card .price {
+      background: #FFF8E6;
+      border-radius: 10px;
+      padding: 3px 8px;
       font-size: 11px;
       font-weight: 800;
-      color: #D35400;
+      color: #E17055;
       margin-top: 4px;
     }
 
-    /* ЭКРАН 4: ЗАДАНИЯ */
+    /* ВКЛАДКА 4: ЗАДАНИЯ */
     .task-card {
-      background: var(--card-bg);
+      background: #FFFFFF;
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
     }
 
     .task-btn {
@@ -352,64 +450,56 @@
       color: #fff;
       border: none;
       border-radius: 12px;
-      padding: 8px 14px;
+      padding: 8px 12px;
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    /* ЭКРАН 5: КОШЕЛЕК И КОПИЛКА */
-    .wallet-card {
+    /* ВКЛАДКА 5: КОШЕЛЕК */
+    .wallet-banner {
       background: linear-gradient(135deg, #6C5CE7, #8073ED);
       color: #fff;
       border-radius: var(--radius);
       padding: 18px;
-      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .wallet-row {
+    .wallet-banner-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: 700;
     }
 
-    .fast-transfer-grid {
+    .fast-bank-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 8px;
+      margin-top: 6px;
     }
 
-    .transfer-pill {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: #fff;
-      border-radius: 12px;
-      padding: 10px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* ЭКРАН 6: ИСТОРИЯ */
-    .history-item {
+    /* ВКЛАДКА 6: ИСТОРИЯ */
+    .history-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 14px;
       display: flex;
       justify-content: space-between;
-      padding: 12px 14px;
-      background: #FFFFFF;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    /* НИЖНИЙ НАВИГАЦИОННЫЙ БАР (ИЗНАЧАЛЬНЫЙ) */
+    /* Нижняя навигация */
     .bottom-bar {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 70px;
+      height: 68px;
       background: #FFFFFF;
       border-top: 1.5px solid var(--border);
       display: flex;
@@ -423,7 +513,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       font-size: 10px;
       font-weight: 800;
       color: var(--text-muted);
@@ -435,9 +525,9 @@
       color: var(--primary);
     }
 
-    .nav-item span:first-child { font-size: 20px; }
+    .nav-item span:first-child { font-size: 19px; }
 
-    /* ОНБОРДИНГ: ВЫБОР ПИТОМЦА И ИМЕНИ */
+    /* ОНБОРДИНГ */
     .onboarding-wrap {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -447,23 +537,23 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 24px;
+      padding: 24px;
       text-align: center;
     }
 
-    .pet-selector-row {
+    .pet-choice-group {
       display: flex;
-      gap: 16px;
-      margin: 20px 0;
+      gap: 14px;
+      margin: 18px 0;
     }
 
-    .pet-choice {
-      width: 72px;
-      height: 72px;
+    .pet-choice-btn {
+      width: 70px;
+      height: 70px;
       border-radius: 20px;
       border: 2px solid var(--border);
       background: #FFFFFF;
-      font-size: 38px;
+      font-size: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -471,7 +561,7 @@
       transition: all 0.2s;
     }
 
-    .pet-choice.selected {
+    .pet-choice-btn.selected {
       border-color: var(--primary);
       background: #F1EFFF;
       transform: scale(1.1);
@@ -482,11 +572,11 @@
       background: #FFFFFF;
       border: 1.5px solid var(--border);
       border-radius: 16px;
-      padding: 14px;
+      padding: 13px;
       font-size: 15px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       outline: none;
     }
 
@@ -496,31 +586,63 @@
       color: #fff;
       border: none;
       border-radius: 16px;
-      padding: 15px;
-      font-size: 16px;
+      padding: 14px;
+      font-size: 15px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(108, 92, 231, 0.3);
+      box-shadow: 0 6px 16px rgba(108, 92, 231, 0.28);
     }
 
-    /* МОДАЛКА ЗВУКА */
+    .primary-btn:active { transform: scale(0.98); }
+
+    /* МОДАЛЬНЫЕ ОКНА */
     .modal-backdrop {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.5);
       backdrop-filter: blur(4px);
-      z-index: 50;
+      z-index: 80;
       display: none;
       align-items: flex-end;
     }
 
-    .modal-backdrop.open { display: flex; }
+    .modal-backdrop.open { display: flex; animation: fadeIn 0.2s ease; }
 
     .modal-window {
       width: 100%;
       background: #FFFFFF;
       border-radius: 28px 28px 0 0;
-      padding: 24px 20px 34px;
+      padding: 22px 20px 32px;
+      max-height: 85%;
+      overflow-y: auto;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: #F1F0FF;
+      font-weight: 800;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #F1F0FF;
+      font-weight: 700;
+      font-size: 13px;
     }
   </style>
 </head>
@@ -528,167 +650,191 @@
 
   <div class="app-screen">
 
-    <!-- Верхняя панель (единая для всех вкладок) -->
+    <!-- Верхняя панель -->
     <header class="header">
-      <div class="header-title" id="pageTitle">ФинПитомец</div>
-      <div class="header-actions">
+      <div class="age-switcher">
+        <button class="age-btn active" onclick="setAge(event, '7-8')">7-8 лет</button>
+        <button class="age-btn" onclick="setAge(event, '9-11')">9-11 лет</button>
+      </div>
+      <div class="top-icons">
         <div class="coin-badge">
           <span>🪙</span>
-          <span id="walletTop">50</span>
+          <span id="topCoins">50</span>
         </div>
-        <button class="icon-btn" onclick="openSoundModal()">🔊</button>
+        <button class="icon-btn" onclick="openModal('soundModal')">🔊</button>
+        <button class="icon-btn" onclick="showTip()">💡</button>
       </div>
     </header>
 
-    <!-- ВКЛАДКА 1: ПИТОМЕЦ -->
+    <!-- ВКЛАДКА 1: ПИТОМЕЦ (ОСНОВНОЙ ДАШБОРД) -->
     <main class="tab-content active" id="tabPet">
-      <section class="pet-hero">
-        <div class="pet-halo"></div>
-        <div class="pet-avatar" id="mainPetAvatar" onclick="petClick()">🐣</div>
-        <div class="pet-name-badge">
-          <h2 id="displayPetName">Жужа</h2>
-          <div class="pet-status" id="petStatusText">Радуется новому дню! ✨</div>
+      <section class="pet-card">
+        <div class="speech-bubble">
+          <span>💬</span>
+          <span id="speechText">Привет! Погнали копить монетки!</span>
+        </div>
+        <div class="pet-row">
+          <div class="pet-avatar-wrap" onclick="petAction()">
+            <div class="pet-avatar" id="mainAvatar">🐯</div>
+            <span class="pet-name-label" id="mainPetName">Финни</span>
+          </div>
+          <div class="pet-balances">
+            <div class="balance-badge">
+              <span class="label">👛 Кошелек</span>
+              <span class="val" id="badgeWallet">50 м.</span>
+            </div>
+            <div class="balance-badge">
+              <span class="label">🏦 Копилка</span>
+              <span class="val" id="badgeBank">100 м.</span>
+            </div>
+            <button class="quick-transfer-btn" onclick="openModal('transferModal')">
+              ⇄ Перевести средства
+            </button>
+          </div>
         </div>
       </section>
 
-      <!-- Уровень питомца -->
-      <section class="card">
-        <div class="level-row">
-          <span class="level-tag">Уровень 1</span>
-          <span style="color: var(--text-muted);">Осталось 40 XP</span>
-        </div>
-        <div class="stat-bar-track" style="margin-top: 6px;">
-          <div class="stat-bar-fill" style="width: 60%; background: var(--accent-yellow);"></div>
-        </div>
-      </section>
-
-      <!-- Шкалы потребностей -->
-      <section class="card stats-list">
-        <div>
-          <div class="stat-item-top">
+      <!-- 3 шкалы параметров -->
+      <section class="bars-row">
+        <div class="stat-pill">
+          <div class="stat-title">
             <span>🍎 Сытость</span>
-            <span id="txtHunger">75%</span>
+            <span id="txtHunger" style="color: var(--accent-green);">80%</span>
           </div>
-          <div class="stat-bar-track">
-            <div class="stat-bar-fill" id="barHunger" style="width: 75%; background: var(--accent-green);"></div>
+          <div class="stat-bar">
+            <div class="stat-fill" id="barHunger" style="width: 80%; background: var(--accent-green);"></div>
           </div>
         </div>
-
-        <div>
-          <div class="stat-item-top">
+        <div class="stat-pill">
+          <div class="stat-title">
             <span>🎾 Веселье</span>
-            <span id="txtFun">60%</span>
+            <span id="txtFun" style="color: var(--accent-pink);">70%</span>
           </div>
-          <div class="stat-bar-track">
-            <div class="stat-bar-fill" id="barFun" style="width: 60%; background: var(--accent-pink);"></div>
+          <div class="stat-bar">
+            <div class="stat-fill" id="barFun" style="width: 70%; background: var(--accent-pink);"></div>
           </div>
         </div>
-
-        <div>
-          <div class="stat-item-top">
+        <div class="stat-pill">
+          <div class="stat-title">
             <span>🫧 Чистота</span>
-            <span id="txtClean">90%</span>
+            <span id="txtClean" style="color: var(--accent-blue);">90%</span>
           </div>
-          <div class="stat-bar-track">
-            <div class="stat-bar-fill" id="barClean" style="width: 90%; background: #0984E3;"></div>
+          <div class="stat-bar">
+            <div class="stat-fill" id="barClean" style="width: 90%; background: var(--accent-blue);"></div>
           </div>
         </div>
+      </section>
+
+      <!-- Карточка цели -->
+      <section class="goal-card" onclick="openModal('goalModal')">
+        <div class="goal-top">
+          <span id="activeGoalTitle">🎯 Цель: Новый мячик</span>
+          <span id="goalPercentTxt">100 / 200 м. (50%)</span>
+        </div>
+        <div class="goal-track">
+          <div class="goal-prog" id="goalBarFill" style="width: 50%;"></div>
+        </div>
+        <div class="goal-sub">Осталось накопить: ~2 периода при текущем темпе</div>
       </section>
 
       <!-- Быстрый уход -->
-      <section class="pet-quick-care">
-        <button class="care-btn" onclick="feedQuick()">
+      <section class="care-row">
+        <button class="care-card-btn" onclick="careFeed()">
           <span>🍎</span>
-          <span class="btn-label">Кормить</span>
-          <span class="btn-price">-10 м.</span>
+          <span class="lbl">Кормить</span>
+          <span class="prc">-10 м.</span>
         </button>
-        <button class="care-btn" onclick="playQuick()">
+        <button class="care-card-btn" onclick="carePlay()">
           <span>🎾</span>
-          <span class="btn-label">Играть</span>
-          <span class="btn-price">+ Веселье</span>
+          <span class="lbl">Играть</span>
+          <span class="prc">+ Веселье</span>
         </button>
-        <button class="care-btn" onclick="washQuick()">
+        <button class="care-card-btn" onclick="careWash()">
           <span>🫧</span>
-          <span class="btn-label">Мыть</span>
-          <span class="btn-price">+ Чистота</span>
+          <span class="lbl">Помыть</span>
+          <span class="prc">+ Чистота</span>
         </button>
       </section>
     </main>
 
-    <!-- ВКЛАДКА 2: БЮДЖЕТ -->
+    <!-- ВКЛАДКА 2: БЮДЖЕТ (50/30/20) -->
     <section class="tab-content" id="tabBudget">
-      <div class="donut-block">
-        <div class="donut"></div>
-        <div style="font-size: 12px; font-weight: 700; display: flex; flex-direction: column; gap: 5px;">
-          <span style="color: var(--accent-green);">● 50% Обязательное</span>
-          <span style="color: var(--primary);">● 30% Желания</span>
-          <span style="color: var(--accent-orange);">● 20% В копилку</span>
+      <div class="budget-chart-container">
+        <div class="donut-chart"></div>
+        <div class="budget-legend">
+          <span style="color: var(--accent-green);">● Обязательные (50%)</span>
+          <span style="color: var(--primary);">● Желания (30%)</span>
+          <span style="color: var(--accent-orange);">● Сбережения (20%)</span>
         </div>
       </div>
 
-      <div class="card budget-slider-card" style="background: #E8F8F5;">
+      <div class="budget-row-input" style="background: #E8F8F5;">
         <div>
-          <strong style="font-size: 13px;">🥦 Еда и забота</strong>
-          <div style="font-size: 11px; color: var(--text-muted);">Обязательные траты</div>
+          <strong>🥦 Обязательные траты</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">Еда и забота</div>
         </div>
-        <div class="ctrl-group">
-          <button class="num-btn" onclick="adjBudget('b1', -10)">-</button>
-          <span style="font-weight: 800; min-width: 25px; text-align: center;" id="b1">50</span>
-          <button class="num-btn" onclick="adjBudget('b1', 10)">+</button>
+        <div>
+          <button class="step-btn" onclick="adjVal('bNeed', -10)">-</button>
+          <span style="margin: 0 8px; font-weight: 800;" id="bNeed">50</span>
+          <button class="step-btn" onclick="adjVal('bNeed', 10)">+</button>
         </div>
       </div>
 
-      <div class="card budget-slider-card" style="background: #F3F1FD;">
+      <div class="budget-row-input" style="background: #F3F1FD;">
         <div>
-          <strong style="font-size: 13px;">🎁 Радости и игры</strong>
-          <div style="font-size: 11px; color: var(--text-muted);">Необязательные траты</div>
+          <strong>🎁 Желания и игры</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">Приятности</div>
         </div>
-        <div class="ctrl-group">
-          <button class="num-btn" onclick="adjBudget('b2', -10)">-</button>
-          <span style="font-weight: 800; min-width: 25px; text-align: center;" id="b2">30</span>
-          <button class="num-btn" onclick="adjBudget('b2', 10)">+</button>
+        <div>
+          <button class="step-btn" onclick="adjVal('bWant', -10)">-</button>
+          <span style="margin: 0 8px; font-weight: 800;" id="bWant">30</span>
+          <button class="step-btn" onclick="adjVal('bWant', 10)">+</button>
         </div>
       </div>
 
-      <div class="card budget-slider-card" style="background: #FFF4E6;">
+      <div class="budget-row-input" style="background: #FFF4E6;">
         <div>
-          <strong style="font-size: 13px;">🏦 Накопления</strong>
-          <div style="font-size: 11px; color: var(--text-muted);">В копилку на мечту</div>
+          <strong>🏦 Копилка на цель</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">Сбережения</div>
         </div>
-        <div class="ctrl-group">
-          <button class="num-btn" onclick="adjBudget('b3', -10)">-</button>
-          <span style="font-weight: 800; min-width: 25px; text-align: center;" id="b3">20</span>
-          <button class="num-btn" onclick="adjBudget('b3', 10)">+</button>
+        <div>
+          <button class="step-btn" onclick="adjVal('bSave', -10)">-</button>
+          <span style="margin: 0 8px; font-weight: 800;" id="bSave">20</span>
+          <button class="step-btn" onclick="adjVal('bSave', 10)">+</button>
         </div>
+      </div>
+
+      <div style="background: #FFF; padding: 12px; border-radius: 16px; border: 1px solid var(--border); font-size: 11px; color: var(--text-muted);">
+        💡 <strong>Совет Финни:</strong> Правило 50/30/20 помогает копить монетки без стресса!
       </div>
     </section>
 
     <!-- ВКЛАДКА 3: ПОКУПКИ (МАГАЗИН) -->
     <section class="tab-content" id="tabShop">
       <div class="shop-grid">
-        <div class="shop-item" onclick="buyItem('Вкусный корм', 15, 'hunger', 30)">
-          <div class="shop-item-icon">🍖</div>
-          <div class="shop-item-name">Корм</div>
-          <div class="shop-item-effect">Сытость +30</div>
-          <div class="shop-item-price">15 монет</div>
+        <div class="shop-card" onclick="buyShopItem('Вкусный корм', 15, 'hunger', 30)">
+          <div class="icon">🍖</div>
+          <div class="name">Корм</div>
+          <div class="effect">Сытость +30</div>
+          <div class="price">15 монет</div>
         </div>
-        <div class="shop-item" onclick="buyItem('Мыло с пеной', 12, 'clean', 30)">
-          <div class="shop-item-icon">🧼</div>
-          <div class="shop-item-name">Мыло</div>
-          <div class="shop-item-effect">Чистота +30</div>
-          <div class="shop-item-price">12 монет</div>
+        <div class="shop-card" onclick="buyShopItem('Мыло с пеной', 12, 'clean', 30)">
+          <div class="icon">🧼</div>
+          <div class="name">Мыло</div>
+          <div class="effect">Чистота +30</div>
+          <div class="price">12 монет</div>
         </div>
-        <div class="shop-item" onclick="buyItem('Футбольный мяч', 20, 'fun', 25)">
-          <div class="shop-item-icon">⚽</div>
-          <div class="shop-item-name">Мячик</div>
-          <div class="shop-item-effect">Веселье +25</div>
-          <div class="shop-item-price">20 монет</div>
+        <div class="shop-card" onclick="buyShopItem('Мячик для игр', 14, 'fun', 30)">
+          <div class="icon">⚽</div>
+          <div class="name">Мячик</div>
+          <div class="effect">Веселье +30</div>
+          <div class="price">14 монет</div>
         </div>
-        <div class="shop-item" onclick="buyItem('Мишка плюшевый', 28, 'fun', 40)">
-          <div class="shop-item-icon">🧸</div>
-          <div class="shop-item-name">Медвежонок</div>
-          <div class="shop-item-effect">Веселье +40</div>
-          <div class="shop-item-price">28 монет</div>
+        <div class="shop-card" onclick="buyShopItem('Медвежонок', 28, 'fun', 50)">
+          <div class="icon">🧸</div>
+          <div class="name">Медвежонок</div>
+          <div class="effect">Веселье +50</div>
+          <div class="price">28 монет</div>
         </div>
       </div>
     </section>
@@ -697,18 +843,18 @@
     <section class="tab-content" id="tabTasks">
       <div class="task-card">
         <div>
-          <strong style="font-size: 13px;">📖 Прочитать финансовый совет</strong>
+          <strong style="font-size: 13px;">📖 Прочитать фин-совет</strong>
           <div style="font-size: 11px; color: var(--accent-green); font-weight: 700;">+10 монет</div>
         </div>
-        <button class="task-btn" onclick="completeTask(10, 'Чтение совета')">Забрать</button>
+        <button class="task-btn" onclick="finishTask(10, 'Чтение совета')">Забрать</button>
       </div>
 
       <div class="task-card">
         <div>
-          <strong style="font-size: 13px;">🧹 Убрать свою комнату</strong>
+          <strong style="font-size: 13px;">🧹 Навести порядок</strong>
           <div style="font-size: 11px; color: var(--accent-green); font-weight: 700;">+25 монет</div>
         </div>
-        <button class="task-btn" onclick="completeTask(25, 'Помощь по дому')">Сделано</button>
+        <button class="task-btn" onclick="finishTask(25, 'Порядок в комнате')">Выполнено</button>
       </div>
 
       <div class="task-card">
@@ -716,120 +862,180 @@
           <strong style="font-size: 13px;">🎯 Отложить 20 монет в копилку</strong>
           <div style="font-size: 11px; color: var(--accent-green); font-weight: 700;">+15 монет</div>
         </div>
-        <button class="task-btn" onclick="completeTask(15, 'В копилку без остатка')">Забрать</button>
+        <button class="task-btn" onclick="finishTask(15, 'В копилку без остатка')">Забрать</button>
       </div>
     </section>
 
-    <!-- ВКЛАДКА 5: КОШЕЛЕК И КОПИЛКА -->
+    <!-- ВКЛАДКА 5: КОШЕЛЕК -->
     <section class="tab-content" id="tabWallet">
-      <div class="wallet-card">
-        <div class="wallet-row">
+      <div class="wallet-banner">
+        <div class="wallet-banner-row">
           <span>Сумма в кошельке:</span>
-          <span style="font-size: 20px; font-weight: 900;" id="walletBig">50 м.</span>
+          <span id="bannerWallet" style="font-size: 18px; font-weight: 900;">50 м.</span>
         </div>
-        <div class="wallet-row">
+        <div class="wallet-banner-row">
           <span>В копилке на мечту:</span>
-          <span style="font-size: 20px; font-weight: 900;" id="bankBig">100 м.</span>
+          <span id="bannerBank" style="font-size: 18px; font-weight: 900;">100 м.</span>
         </div>
       </div>
 
-      <h3 style="font-size: 15px; margin-bottom: 10px;">Быстрый перевод в копилку</h3>
-      <div class="fast-transfer-grid">
-        <button class="primary-btn" style="padding: 10px;" onclick="transferToBank(20)">+20 м.</button>
-        <button class="primary-btn" style="padding: 10px;" onclick="transferToBank(50)">+50 м.</button>
-        <button class="primary-btn" style="padding: 10px;" onclick="transferToBank(100)">+100 м.</button>
+      <h3 style="font-size: 14px; margin-top: 4px;">Быстрое пополнение копилки:</h3>
+      <div class="fast-bank-grid">
+        <button class="primary-btn" style="padding: 10px;" onclick="transferBank(20)">+20 м.</button>
+        <button class="primary-btn" style="padding: 10px;" onclick="transferBank(50)">+50 м.</button>
+        <button class="primary-btn" style="padding: 10px;" onclick="transferBank(100)">+100 м.</button>
       </div>
+      <button class="step-btn" style="width: 100%; height: 42px; margin-top: 8px;" onclick="transferBank(-20)">
+        Вернуть 20 м. в кошелек
+      </button>
     </section>
 
-    <!-- ВКЛАДКА 6: ИСТОРИЯ ОПЕРАЦИЙ -->
+    <!-- ВКЛАДКА 6: ИСТОРИЯ -->
     <section class="tab-content" id="tabHistory">
-      <div id="historyList">
-        <div class="history-item">
-          <span>Начальный бонус</span>
+      <div id="historyList" style="display: flex; flex-direction: column; gap: 8px;">
+        <div class="history-card">
+          <span>Стартовый капитал</span>
           <span style="color: var(--accent-green);">+50 м.</span>
         </div>
       </div>
     </section>
 
-    <!-- Нижняя панель навигации (ИЗНАЧАЛЬНЫЙ НАБОР) -->
+    <!-- Нижняя панель навигации -->
     <nav class="bottom-bar">
-      <div class="nav-item active" onclick="switchTab('tabPet', this, 'ФинПитомец')">
+      <div class="nav-item active" onclick="switchNav('tabPet', this)">
         <span>🐾</span>
         <span>Питомец</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tabBudget', this, 'Бюджет')">
+      <div class="nav-item" onclick="switchNav('tabBudget', this)">
         <span>📊</span>
         <span>Бюджет</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tabShop', this, 'Покупки')">
+      <div class="nav-item" onclick="switchNav('tabShop', this)">
         <span>🛍️</span>
         <span>Покупки</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tabTasks', this, 'Задания')">
+      <div class="nav-item" onclick="switchNav('tabTasks', this)">
         <span>✅</span>
         <span>Задания</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tabWallet', this, 'Кошелёк')">
+      <div class="nav-item" onclick="switchNav('tabWallet', this)">
         <span>👛</span>
         <span>Кошелёк</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tabHistory', this, 'История')">
+      <div class="nav-item" onclick="switchNav('tabHistory', this)">
         <span>🕒</span>
         <span>История</span>
       </div>
     </nav>
 
-    <!-- ЭКРАН ОНБОРДИНГА СО ЗНАКОМСТВОМ И ВЫБОРОМ ПИТОМЦА -->
+    <!-- ОНБОРДИНГ: ВЫБОР ПЕРСОНАЖА И ИМЕНИ -->
     <div class="onboarding-wrap" id="onboardingScreen">
       <h2 style="font-size: 22px; font-weight: 900; margin-bottom: 6px;">Выбери питомца</h2>
       <p style="font-size: 13px; color: var(--text-muted);">С кем ты будешь учиться копить монетки?</p>
 
-      <div class="pet-selector-row">
-        <div class="pet-choice selected" onclick="pickPet('🐣', 'Жужа', this)">🐣</div>
-        <div class="pet-choice" onclick="pickPet('🐯', 'Финни', this)">🐯</div>
-        <div class="pet-choice" onclick="pickPet('🐱', 'Барсик', this)">🐱</div>
+      <div class="pet-choice-group">
+        <div class="pet-choice-btn" onclick="selectChoice('🐣', 'Жужа', this)">🐣</div>
+        <div class="pet-choice-btn selected" onclick="selectChoice('🐯', 'Финни', this)">🐯</div>
+        <div class="pet-choice-btn" onclick="selectChoice('🐱', 'Барсик', this)">🐱</div>
       </div>
 
-      <input type="text" class="input-clean" id="petNameInput" value="Жужа" placeholder="Имя питомца">
-
-      <button class="primary-btn" onclick="finishOnboarding()">Погнали! Начать дружить 🚀</button>
+      <input type="text" class="input-clean" id="inputPetName" value="Финни" placeholder="Имя питомца">
+      <button class="primary-btn" onclick="completeOnboarding()">Погнали! Начать дружить 🚀</button>
     </div>
 
-    <!-- МОДАЛКА НАСТРОЕК ЗВУКА -->
-    <div class="modal-backdrop" id="soundModal">
+    <!-- МОДАЛКА: ПЕРЕВОД СРЕДСТВ -->
+    <div class="modal-backdrop" id="transferModal">
       <div class="modal-window">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h3>Звуковые эффекты</h3>
-          <button class="num-btn" onclick="closeSoundModal()">✕</button>
+        <div class="modal-head">
+          <h3>Перевод средств</h3>
+          <button class="close-btn" onclick="closeModal('transferModal')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
-          Звуки монет, нажатий и реакций питомца синтезируются через браузер.
+          Пополнение копилки приближает цель и радует питомца!
         </p>
-        <button class="primary-btn" onclick="testSound()">Проверить звук 🪙</button>
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <button class="primary-btn" onclick="transferBank(20)">+20 в копилку</button>
+          <button class="primary-btn" onclick="transferBank(50)">+50 в копилку</button>
+          <button class="primary-btn" onclick="transferBank(100)">+100 в копилку</button>
+        </div>
+        <button class="step-btn" style="width: 100%; height: 40px;" onclick="transferBank(-20)">
+          Вернуть 20 в кошелек
+        </button>
+      </div>
+    </div>
+
+    <!-- МОДАЛКА: КАТАЛОГ ЦЕЛЕЙ -->
+    <div class="modal-backdrop" id="goalModal">
+      <div class="modal-window">
+        <div class="modal-head">
+          <h3>Каталог целей</h3>
+          <button class="close-btn" onclick="closeModal('goalModal')">✕</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="task-card" onclick="setGoal('Мячик для игр', 150)">
+            <div>⚽ <strong>Мячик</strong> (150 м.)</div>
+            <span style="color: var(--primary); font-weight: 800;">Выбрать</span>
+          </div>
+          <div class="task-card" onclick="setGoal('Игрушечный робот', 300)">
+            <div>🤖 <strong>Робот</strong> (300 м.)</div>
+            <span style="color: var(--primary); font-weight: 800;">Выбрать</span>
+          </div>
+          <div class="task-card" onclick="setGoal('Уютный домик', 500)">
+            <div>🏠 <strong>Домик</strong> (500 м.)</div>
+            <span style="color: var(--primary); font-weight: 800;">Выбрать</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- МОДАЛКА: ЗВУК И МУЗЫКА -->
+    <div class="modal-backdrop" id="soundModal">
+      <div class="modal-window">
+        <div class="modal-head">
+          <h3>Звук и музыка</h3>
+          <button class="close-btn" onclick="closeModal('soundModal')">✕</button>
+        </div>
+        <div class="toggle-row">
+          <span>Звуковые эффекты (SFX)</span>
+          <input type="checkbox" id="toggleSFX" checked>
+        </div>
+        <div class="toggle-row">
+          <span>Фоновая музыка (BGM)</span>
+          <input type="checkbox" id="toggleBGM" onchange="switchBGM(event)">
+        </div>
       </div>
     </div>
 
   </div>
 
   <script>
-    // --- Состояние игры ---
+    // --- Состояние ---
     let state = {
-      petAvatar: '🐣',
-      petName: 'Жужа',
+      petAvatar: '🐯',
+      petName: 'Финни',
       wallet: 50,
       bank: 100,
-      hunger: 75,
-      fun: 60,
-      clean: 90
+      hunger: 80,
+      fun: 70,
+      clean: 90,
+      goalTitle: 'Новый мячик',
+      goalTarget: 200,
+      sfx: true,
+      bgm: false
     };
 
-    // --- Web Audio API (звуковой движок) ---
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    // --- Web Audio API (генерация звуков без внешних файлов) ---
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let actx = null;
 
-    function playTone(freq, type, duration) {
+    function initSound() {
+      if (!actx) actx = new AudioCtx();
+    }
+
+    function beep(freq, type, duration) {
+      if (!state.sfx) return;
+      initSound();
       try {
-        if (!actx) actx = new AudioContext();
         const osc = actx.createOscillator();
         const gain = actx.createGain();
         osc.type = type;
@@ -844,149 +1050,208 @@
     }
 
     function soundCoin() {
-      playTone(987.77, 'sine', 0.1);
-      setTimeout(() => playTone(1318.51, 'sine', 0.2), 80);
+      beep(987.77, 'sine', 0.1);
+      setTimeout(() => beep(1318.51, 'sine', 0.2), 80);
     }
 
     function soundClick() {
-      playTone(400, 'triangle', 0.05);
+      beep(400, 'triangle', 0.05);
     }
 
     function soundHappy() {
-      playTone(523.25, 'sine', 0.1);
-      setTimeout(() => playTone(659.25, 'sine', 0.1), 90);
-      setTimeout(() => playTone(783.99, 'sine', 0.2), 180);
+      beep(523.25, 'sine', 0.1);
+      setTimeout(() => beep(659.25, 'sine', 0.1), 90);
+      setTimeout(() => beep(783.99, 'sine', 0.2), 180);
+    }
+
+    let bgmInterval = null;
+    function switchBGM(e) {
+      state.bgm = e.target.checked;
+      if (state.bgm) {
+        initSound();
+        const mel = [261.63, 329.63, 392.00, 523.25];
+        let idx = 0;
+        bgmInterval = setInterval(() => {
+          if (!state.bgm) return;
+          beep(mel[idx % mel.length], 'sine', 0.35);
+          idx++;
+        }, 1200);
+      } else {
+        clearInterval(bgmInterval);
+      }
     }
 
     // --- Онбординг ---
-    function pickPet(avatar, defaultName, element) {
+    function selectChoice(avatar, name, el) {
       soundClick();
       state.petAvatar = avatar;
-      document.querySelectorAll('.pet-choice').forEach(el => el.classList.remove('selected'));
-      element.classList.add('selected');
-      document.getElementById('petNameInput').value = defaultName;
+      document.querySelectorAll('.pet-choice-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('inputPetName').value = name;
     }
 
-    function finishOnboarding() {
+    function completeOnboarding() {
       soundHappy();
-      const nameInput = document.getElementById('petNameInput').value.trim();
-      if (nameInput) state.petName = nameInput;
+      const val = document.getElementById('inputPetName').value.trim();
+      if (val) state.petName = val;
 
-      document.getElementById('mainPetAvatar').textContent = state.petAvatar;
-      document.getElementById('displayPetName').textContent = state.petName;
+      document.getElementById('mainAvatar').textContent = state.petAvatar;
+      document.getElementById('mainPetName').textContent = state.petName;
       document.getElementById('onboardingScreen').style.display = 'none';
+      say(`Ура! Я ${state.petName}, давай копить вместе!`);
       updateUI();
     }
 
-    // --- Переключение вкладок ---
-    function switchTab(tabId, el, title) {
+    // --- Навигация ---
+    function switchNav(tabId, el) {
       soundClick();
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
       document.getElementById(tabId).classList.add('active');
       el.classList.add('active');
-      document.getElementById('pageTitle').textContent = title;
     }
 
-    // --- Действия питомца ---
-    function petClick() {
-      const el = document.getElementById('mainPetAvatar');
+    // --- Действия на дашборде ---
+    function petAction() {
+      const el = document.getElementById('mainAvatar');
       el.classList.add('bounce');
       setTimeout(() => el.classList.remove('bounce'), 300);
       soundHappy();
       state.fun = Math.min(100, state.fun + 5);
       updateUI();
+      say('Мурр! Мне нравится!');
     }
 
-    function feedQuick() {
+    function careFeed() {
       if (state.wallet >= 10) {
         state.wallet -= 10;
         state.hunger = Math.min(100, state.hunger + 15);
         soundHappy();
         logHistory('Кормление', -10);
         updateUI();
+        say('Ням! Спасибо за заботу!');
       } else {
-        alert('Недостаточно монет в кошельке!');
+        say('Не хватает монеток!');
       }
     }
 
-    function playQuick() {
+    function carePlay() {
       soundHappy();
       state.fun = Math.min(100, state.fun + 15);
       state.clean = Math.max(0, state.clean - 5);
       updateUI();
+      say('Ура, отличная игра!');
     }
 
-    function washQuick() {
+    function careWash() {
       soundClick();
       state.clean = 100;
       updateUI();
+      say('Теперь я чистый и блещу!');
     }
 
-    // --- Магазин покупок ---
-    function buyItem(name, cost, statType, amount) {
+    // --- Переводы и цели ---
+    function transferBank(amount) {
+      if (amount > 0) {
+        if (state.wallet >= amount) {
+          state.wallet -= amount;
+          state.bank += amount;
+          soundCoin();
+          logHistory('В копилку', -amount);
+          say(`+${amount} монет в копилку!`);
+        } else {
+          say('Не хватает средств в кошельке!');
+          return;
+        }
+      } else {
+        const absVal = Math.abs(amount);
+        if (state.bank >= absVal) {
+          state.bank -= absVal;
+          state.wallet += absVal;
+          soundCoin();
+          logHistory('Из копилки', absVal);
+          say(`Вернули ${absVal} монет в кошелек.`);
+        }
+      }
+      updateUI();
+      closeModal('transferModal');
+    }
+
+    function setGoal(name, target) {
+      state.goalTitle = name;
+      state.goalTarget = target;
+      soundHappy();
+      updateUI();
+      closeModal('goalModal');
+      say(`Новая цель: ${name}!`);
+    }
+
+    // --- Магазин и задания ---
+    function buyShopItem(name, cost, stat, addVal) {
       if (state.wallet >= cost) {
         state.wallet -= cost;
-        state[statType] = Math.min(100, state[statType] + amount);
+        state[stat] = Math.min(100, state[stat] + addVal);
         soundHappy();
         logHistory(`Покупка: ${name}`, -cost);
         updateUI();
-        alert(`Куплено: ${name}!`);
+        say(`Куплено: ${name}!`);
       } else {
-        alert('Не хватает монет в кошельке!');
+        say('Недостаточно монет для покупки!');
       }
     }
 
-    // --- Задания ---
-    function completeTask(reward, name) {
+    function finishTask(reward, name) {
       state.wallet += reward;
       soundCoin();
       logHistory(`Задание: ${name}`, reward);
       updateUI();
-      alert(`Получено +${reward} монет!`);
+      say(`Отлично! +${reward} монет!`);
     }
 
-    // --- Кошелек и копилка ---
-    function transferToBank(amount) {
-      if (state.wallet >= amount) {
-        state.wallet -= amount;
-        state.bank += amount;
-        soundCoin();
-        logHistory(`В копилку`, -amount);
-        updateUI();
-      } else {
-        alert('Недостаточно монет для перевода!');
-      }
-    }
-
-    function adjBudget(id, delta) {
+    function adjVal(id, delta) {
       soundClick();
       const el = document.getElementById(id);
-      let val = parseInt(el.textContent) + delta;
-      if (val >= 0) el.textContent = val;
+      let v = parseInt(el.textContent) + delta;
+      if (v >= 0) el.textContent = v;
     }
 
-    // --- История операций ---
-    function logHistory(title, amount) {
+    function say(text) {
+      document.getElementById('speechText').textContent = text;
+    }
+
+    function setAge(e, age) {
+      soundClick();
+      document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      say(`Режим адаптирован для возраста ${age}`);
+    }
+
+    function showTip() {
+      soundHappy();
+      say('Совет: Сначала отложи монетки в копилку, а потом трать!');
+    }
+
+    function logHistory(name, val) {
       const list = document.getElementById('historyList');
       const item = document.createElement('div');
-      item.className = 'history-item';
-      const isPositive = amount > 0;
+      item.className = 'history-card';
+      const pos = val > 0;
       item.innerHTML = `
-        <span>${title}</span>
-        <span style="color: ${isPositive ? 'var(--accent-green)' : 'var(--accent-orange)'};">
-          ${isPositive ? '+' : ''}${amount} м.
+        <span>${name}</span>
+        <span style="color: ${pos ? 'var(--accent-green)' : 'var(--accent-orange)'};">
+          ${pos ? '+' : ''}${val} м.
         </span>
       `;
       list.prepend(item);
     }
 
-    // --- Обновление экрана ---
     function updateUI() {
-      document.getElementById('walletTop').textContent = state.wallet;
-      document.getElementById('walletBig').textContent = `${state.wallet} м.`;
-      document.getElementById('bankBig').textContent = `${state.bank} м.`;
+      document.getElementById('topCoins').textContent = state.wallet;
+      document.getElementById('badgeWallet').textContent = `${state.wallet} м.`;
+      document.getElementById('badgeBank').textContent = `${state.bank} м.`;
+      document.getElementById('bannerWallet').textContent = `${state.wallet} м.`;
+      document.getElementById('bannerBank').textContent = `${state.bank} м.`;
 
       document.getElementById('txtHunger').textContent = `${state.hunger}%`;
       document.getElementById('barHunger').style.width = `${state.hunger}%`;
@@ -996,22 +1261,27 @@
 
       document.getElementById('txtClean').textContent = `${state.clean}%`;
       document.getElementById('barClean').style.width = `${state.clean}%`;
+
+      const pct = Math.min(100, Math.round((state.bank / state.goalTarget) * 100));
+      document.getElementById('activeGoalTitle').textContent = `🎯 Цель: ${state.goalTitle}`;
+      document.getElementById('goalPercentTxt').textContent = `${state.bank} / ${state.goalTarget} м. (${pct}%)`;
+      document.getElementById('goalBarFill').style.width = `${pct}%`;
     }
 
-    // --- Модальное окно звука ---
-    function openSoundModal() {
+    // --- Модалки ---
+    function openModal(id) {
       soundClick();
-      document.getElementById('soundModal').classList.add('open');
+      document.getElementById(id).classList.add('open');
     }
 
-    function closeSoundModal() {
+    function closeModal(id) {
       soundClick();
-      document.getElementById('soundModal').classList.remove('open');
+      document.getElementById(id).classList.remove('open');
     }
 
-    function testSound() {
-      soundCoin();
-    }
+    document.getElementById('toggleSFX').addEventListener('change', (e) => {
+      state.sfx = e.target.checked;
+    });
 
     updateUI();
   </script>
