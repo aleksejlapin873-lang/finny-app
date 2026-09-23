@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -24,24 +24,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install dependencies and generate Android
+      - name: Install dependencies and sync Capacitor
         run: |
           npm install
           npx cap add android || true
           npx cap sync android
 
-      - name: Replace Android System Icons
+      - name: Copy App Icon to Android Mipmap Folders
         run: |
           if [ -f www/icon.png ]; then
-            echo "Обновляем системные иконки Android..."
-            sudo apt-get install -y imagemagick
-            for res in "mipmap-mdpi/48x48" "mipmap-hdpi/72x72" "mipmap-xhdpi/96x96" "mipmap-xxhdpi/144x144" "mipmap-xxxhdpi/192x192"; do
-              dir="android/app/src/main/res/${res%/*}"
-              size="${res#*/}"
-              mkdir -p "$dir"
-              convert www/icon.png -resize "$size" "$dir/ic_launcher.png"
-              convert www/icon.png -resize "$size" "$dir/ic_launcher_round.png"
-              convert www/icon.png -resize "$size" "$dir/ic_launcher_foreground.png"
+            echo "Копируем иконку в системные ресурсы Android..."
+            for dir in android/app/src/main/res/mipmap-*; do
+              if [ -d "$dir" ]; then
+                cp www/icon.png "$dir/ic_launcher.png"
+                cp www/icon.png "$dir/ic_launcher_round.png"
+                cp www/icon.png "$dir/ic_launcher_foreground.png"
+              fi
             done
           fi
 
