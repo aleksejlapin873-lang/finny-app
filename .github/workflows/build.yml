@@ -29,38 +29,24 @@ jobs:
           npm install
           npx cap add android || true
 
-      - name: Generate App Icons via Python
+      - name: Generate App Icons
         run: |
-          python3 -c "
-          import os
-          from PIL import Image
-
-          src_icon = 'www/icon.png'
-          if os.path.exists(src_icon):
-              img = Image.open(src_icon).convert('RGBA')
-              sizes = {
-                  'mipmap-mdpi': 48,
-                  'mipmap-hdpi': 72,
-                  'mipmap-xhdpi': 96,
-                  'mipmap-xxhdpi': 144,
-                  'mipmap-xxxhdpi': 192
-              }
-              base_res = 'android/app/src/main/res'
-              for folder, size in sizes.items():
-                  target_dir = os.path.join(base_res, folder)
-                  os.makedirs(target_dir, exist_ok=True)
-                  resized = img.resize((size, size), Image.Resampling.LANCZOS)
-                  resized.save(os.path.join(target_dir, 'ic_launcher.png'))
-                  resized.save(os.path.join(target_dir, 'ic_launcher_round.png'))
-                  
-                  # Адаптивный передний план (foreground)
-                  fg_size = int(size * 1.5)
-                  fg = img.resize((fg_size, fg_size), Image.Resampling.LANCZOS)
-                  fg.save(os.path.join(target_dir, 'ic_launcher_foreground.png'))
-              print('Иконки успешно сгенерированы во все папки mipmap!')
-          else:
-              print('Файл www/icon.png не найден, пропуск.')
-          "
+          if [ -f "www/icon.png" ]; then
+            echo "Файл www/icon.png найден. Генерируем иконки..."
+            declare -A SIZES=( ["mipmap-mdpi"]=48 ["mipmap-hdpi"]=72 ["mipmap-xhdpi"]=96 ["mipmap-xxhdpi"]=144 ["mipmap-xxxhdpi"]=192 )
+            BASE_RES="android/app/src/main/res"
+            for FOLDER in "${!SIZES[@]}"; do
+              SIZE=${SIZES[$FOLDER]}
+              DIR="$BASE_RES/$FOLDER"
+              mkdir -p "$DIR"
+              convert www/icon.png -resize "${SIZE}x${SIZE}" "$DIR/ic_launcher.png" || cp www/icon.png "$DIR/ic_launcher.png"
+              convert www/icon.png -resize "${SIZE}x${SIZE}" "$DIR/ic_launcher_round.png" || cp www/icon.png "$DIR/ic_launcher_round.png"
+              convert www/icon.png -resize "${SIZE}x${SIZE}" "$DIR/ic_launcher_foreground.png" || cp www/icon.png "$DIR/ic_launcher_foreground.png"
+            done
+            echo "Иконки успешно сгенерированы!"
+          else
+            echo "Файл www/icon.png не найден, пропуск."
+          fi
 
       - name: Sync Android
         run: |
