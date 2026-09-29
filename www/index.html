@@ -16,85 +16,121 @@
       --green: #10B981;
       --amber: #F59E0B;
       --blue: #3B82F6;
-      --radius: 18px;
+      --radius: 20px;
+      --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg); color: var(--text-main); font-size: 15px; user-select: none; }
-    .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background: #fff; position: relative; }
+    body { background-color: var(--bg); color: var(--text-main); font-size: 15px; user-select: none; overflow-x: hidden; }
+    .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background: #fff; position: relative; box-shadow: 0 0 32px rgba(0,0,0,0.06); }
     
     /* Шапка */
-    header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; background: #fff; border-bottom: 1px solid #EEF2F6; position: sticky; top: 0; z-index: 30; }
-    .header-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .pet-avatar-mini { width: 44px; height: 44px; border-radius: 50%; background: #FFE6EE; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 2px solid var(--primary); overflow: hidden; }
+    header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid #EEF2F6; position: sticky; top: 0; z-index: 30; }
+    .header-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.2s var(--bounce); }
+    .header-profile:active { transform: scale(0.95); }
+    .pet-avatar-mini { width: 44px; height: 44px; border-radius: 50%; background: #FFE6EE; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 2.5px solid var(--primary); transition: 0.3s var(--bounce); }
     .header-info h2 { font-size: 15px; font-weight: 800; color: var(--primary-dark); }
     .header-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
     .header-actions { display: flex; gap: 8px; }
-    .btn-icon { background: #F3F4F6; border: none; width: 38px; height: 38px; border-radius: 12px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .btn-icon { background: #F3F4F6; border: none; width: 38px; height: 38px; border-radius: 12px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s var(--bounce); }
+    .btn-icon:active { transform: scale(0.85); background: #E5E7EB; }
 
     /* Демо-лента */
-    .demo-ribbon { background: #FEF3C7; border: 1px dashed #F59E0B; border-radius: 12px; padding: 8px 12px; font-size: 11px; color: #B45309; font-weight: 700; display: flex; justify-content: space-between; align-items: center; margin: 8px 16px 2px; }
+    .demo-ribbon { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 1.5px dashed #F59E0B; border-radius: 14px; padding: 8px 12px; font-size: 11px; color: #B45309; font-weight: 800; display: flex; justify-content: space-between; align-items: center; margin: 8px 16px 2px; }
+    .btn-next-period { background: #F59E0B; color: #fff; border: none; padding: 5px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; cursor: pointer; transition: 0.2s var(--bounce); box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3); }
+    .btn-next-period:active { transform: scale(0.9); }
 
-    /* Баланс */
-    .balance-card { margin: 8px 16px; padding: 14px 16px; background: linear-gradient(135deg, #520978, #310F53); border-radius: var(--radius); color: #fff; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 18px rgba(82, 9, 120, 0.22); }
-    .balance-item span { font-size: 11px; opacity: 0.8; font-weight: 600; text-transform: uppercase; }
-    .balance-item h3 { font-size: 19px; font-weight: 800; margin-top: 2px; }
+    /* Баланс с анимацией изменения */
+    .balance-card { margin: 8px 16px; padding: 14px 18px; background: linear-gradient(135deg, #520978, #310F53); border-radius: var(--radius); color: #fff; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 22px rgba(82, 9, 120, 0.28); transition: transform 0.3s; }
+    .balance-item span { font-size: 11px; opacity: 0.8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .balance-item h3 { font-size: 20px; font-weight: 800; margin-top: 2px; transition: transform 0.2s ease; }
+    .balance-item h3.pulse { transform: scale(1.2); color: #FDE047; }
     .balance-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); }
 
-    /* 2D Персонаж */
+    /* 2D Персонаж и сцена */
     .pet-stage-area { padding: 10px 16px 4px; text-align: center; position: relative; }
-    .pet-svg-box { width: 150px; height: 150px; margin: 0 auto 6px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: petBob 3s ease-in-out infinite; }
-    @keyframes petBob { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.02); } }
-    .pet-svg-box.pet-pat-anim { animation: petPat 0.4s ease-in-out; }
-    @keyframes petPat { 0% { transform: scale(1); } 50% { transform: scale(1.12) rotate(4deg); } 100% { transform: scale(1); } }
-    .pet-svg-box svg { width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.12)); }
+    .pet-svg-box { width: 156px; height: 156px; margin: 0 auto 6px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s ease; }
+    .pet-svg-box svg { width: 100%; height: 100%; filter: drop-shadow(0 10px 20px rgba(82, 9, 120, 0.15)); }
     
-    .floating-heart { position: absolute; font-size: 26px; pointer-events: none; animation: floatUp 0.8s forwards; }
-    @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(0.8); } 100% { opacity: 0; transform: translateY(-50px) scale(1.3); } }
+    /* Анимации дыхания и поглаживания */
+    .pet-breathe { animation: breathe 3.6s ease-in-out infinite; }
+    @keyframes breathe {
+      0%, 100% { transform: translateY(0) scale(1, 1); }
+      50% { transform: translateY(-5px) scale(1.02, 0.98); }
+    }
+    .pet-purr { animation: purrBounce 0.45s var(--bounce); }
+    @keyframes purrBounce {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.15) rotate(3deg); }
+      80% { transform: scale(0.96) rotate(-2deg); }
+      100% { transform: scale(1); }
+    }
 
-    .pet-badge { display: inline-block; background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 12px; border: 2px solid #fff; margin-bottom: 6px; }
-    .pet-speech { background: #F3F4F6; border-radius: 16px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #374151; display: inline-block; margin-bottom: 8px; max-width: 92%; }
+    /* Моргание глазками */
+    .pet-eye { transform-origin: center; animation: blink 4s infinite; }
+    @keyframes blink {
+      0%, 96%, 100% { transform: scaleY(1); }
+      98% { transform: scaleY(0.1); }
+    }
+
+    /* Вылетающие частицы (сердечки и звездочки) */
+    .particle { position: absolute; font-size: 24px; pointer-events: none; animation: popParticle 0.85s forwards ease-out; }
+    @keyframes popParticle {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4); }
+    }
+
+    /* Летающие золотые монетки */
+    .flying-coin { position: fixed; font-size: 26px; z-index: 999; pointer-events: none; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
+
+    .pet-badge { display: inline-block; background: var(--primary); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 12px; border: 2px solid #fff; margin-bottom: 6px; box-shadow: 0 4px 10px rgba(255, 0, 83, 0.25); }
+    .pet-speech { background: #F3F4F6; border-radius: 16px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #374151; display: inline-block; margin-bottom: 8px; max-width: 92%; transition: all 0.3s; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
 
     /* Шкалы */
     .bars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 10px; }
     .bar-card { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 14px; padding: 8px 12px; }
     .bar-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
     .progress-track { width: 100%; height: 8px; background: #E5E7EB; border-radius: 8px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 8px; transition: width 0.4s ease; }
-    .fill-satiety { background: var(--green); }
-    .fill-mood { background: var(--amber); }
+    .progress-fill { height: 100%; border-radius: 8px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .fill-satiety { background: linear-gradient(90deg, #10B981, #34D399); }
+    .fill-mood { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
 
     /* План vs Факт */
     .plan-fact-box { margin: 0 16px 10px; background: #FDF4FF; border: 1px solid #F0ABFC; border-radius: 16px; padding: 10px 14px; font-size: 11px; }
     .plan-fact-row { display: flex; justify-content: space-between; margin-top: 4px; font-weight: 600; }
 
     /* Цель */
-    .goal-widget { margin: 0 16px 12px; padding: 12px 14px; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; }
-    .goal-widget-left { display: flex; align-items: center; gap: 10px; }
+    .goal-widget { margin: 0 16px 12px; padding: 12px 14px; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; transition: transform 0.2s; }
+    .goal-widget-left { display: flex; align-items: center; gap: 10px; cursor: pointer; }
     .goal-icon { font-size: 26px; }
     .goal-titles h4 { font-size: 13px; font-weight: 700; color: #1E1B4B; }
     .goal-titles p { font-size: 11px; color: #4338CA; font-weight: 600; }
     .goal-actions { display: flex; gap: 6px; }
-    .btn-deposit { background: #4F46E5; color: #fff; border: none; padding: 6px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
-    .btn-withdraw { background: #E0E7FF; color: #3730A3; border: none; padding: 6px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .btn-deposit { background: #4F46E5; color: #fff; border: none; padding: 7px 11px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s var(--bounce); }
+    .btn-deposit:active { transform: scale(0.9); }
+    .btn-withdraw { background: #E0E7FF; color: #3730A3; border: none; padding: 7px 11px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s var(--bounce); }
+    .btn-withdraw:active { transform: scale(0.9); }
 
-    /* Панель жизней/попыток в заданиях */
+    /* Панель жизней */
     .attempts-bar { background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 14px; padding: 8px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
     .attempts-title { font-size: 12px; font-weight: 800; color: #BE123C; }
-    .hearts-row { font-size: 16px; letter-spacing: 2px; }
+    .hearts-row { font-size: 16px; letter-spacing: 3px; transition: transform 0.3s var(--bounce); }
 
-    /* Вкладки */
+    /* Нижняя навигация */
     .nav-tabs { display: flex; border-top: 1px solid #EEF2F6; background: #fff; position: sticky; bottom: 0; z-index: 30; }
-    .tab-btn { flex: 1; padding: 10px 0 12px; border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; }
-    .tab-btn.active { color: var(--primary); }
-    .tab-btn span { font-size: 19px; }
+    .tab-btn { flex: 1; padding: 10px 0 12px; border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.25s var(--bounce); }
+    .tab-btn.active { color: var(--primary); transform: translateY(-2px); }
+    .tab-btn span { font-size: 20px; transition: transform 0.2s var(--bounce); }
+    .tab-btn:active span { transform: scale(1.25); }
 
-    .tab-content { display: none; padding: 12px 16px 20px; flex: 1; }
+    .tab-content { display: none; padding: 12px 16px 20px; flex: 1; animation: fadeIn 0.3s ease; }
     .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     .section-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; }
 
     /* Товары */
     .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .shop-item { background: #fff; border: 1.5px solid #F3F4F6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+    .shop-item { background: #fff; border: 1.5px solid #F3F4F6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; transition: all 0.25s var(--bounce); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+    .shop-item:active { transform: scale(0.96); }
     .shop-item.mandatory { border-color: #DEF7EC; background: #FDFEFE; }
     .shop-badge { position: absolute; top: 6px; left: 6px; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
     .badge-mand { background: #059669; color: #fff; }
@@ -102,63 +138,68 @@
     .shop-item-emoji { font-size: 34px; margin: 6px 0 2px; }
     .shop-item-name { font-size: 12px; font-weight: 700; }
     .shop-item-effect { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
-    .btn-buy { width: 100%; padding: 6px 0; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .btn-buy { width: 100%; padding: 7px 0; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s var(--bounce); }
+    .btn-buy:active { transform: scale(0.92); opacity: 0.9; }
 
     /* Квесты */
-    .quest-card { background: #fff; border: 1.5px solid #E5E7EB; border-radius: 16px; padding: 12px; margin-bottom: 10px; }
+    .quest-card { background: #fff; border: 1.5px solid #E5E7EB; border-radius: 16px; padding: 12px; margin-bottom: 10px; transition: 0.2s; }
     .quest-card.completed { border-color: #A7F3D0; background: #F0FDF4; }
     .quest-tag { font-size: 9px; font-weight: 800; color: #6366F1; background: #EEF2FF; padding: 2px 6px; border-radius: 6px; }
     .quest-title { font-size: 13px; font-weight: 700; margin: 4px 0; }
-    .btn-quest-start { background: var(--primary-dark); color: #fff; border: none; padding: 7px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; }
+    .btn-quest-start { background: var(--primary-dark); color: #fff; border: none; padding: 8px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.2s var(--bounce); }
+    .btn-quest-start:active { transform: scale(0.95); }
 
-    /* Полноэкранный Онбординг (Вся страница перекрыта) */
+    /* Полноэкранный Онбординг */
     .fullscreen-onboard { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #FFFFFF; z-index: 1000; flex-direction: column; justify-content: space-between; padding: 32px 24px 20px; box-sizing: border-box; overflow-y: auto; }
     .fullscreen-onboard.active { display: flex; }
     .onboard-content-wrap { max-width: 440px; margin: 0 auto; width: 100%; text-align: center; }
-    .onboarding-screen { display: none; text-align: center; }
+    .onboarding-screen { display: none; text-align: center; animation: fadeIn 0.35s ease; }
     .onboarding-screen.active { display: block; }
-    .onboard-icon { font-size: 72px; margin-bottom: 12px; }
+    .onboard-icon { font-size: 72px; margin-bottom: 12px; animation: float 3s ease-in-out infinite; }
     .onboard-badge { display: inline-block; padding: 4px 12px; background: #EEF2FF; color: #4F46E5; border-radius: 10px; font-size: 11px; font-weight: 800; margin-bottom: 10px; }
-    .onboard-title { font-size: 22px; font-weight: 900; color: var(--primary-dark); margin-bottom: 10px; line-height: 1.2; }
+    .onboard-title { font-size: 22px; font-weight: 900; color: var(--primary-dark); margin-bottom: 10px; line-height: 1.25; }
     .onboard-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
     
-    /* Авторская строчка внизу экрана */
+    /* Авторская подпись */
     .author-tag { font-size: 11px; font-weight: 700; color: #9CA3AF; text-align: center; letter-spacing: 0.3px; padding-top: 14px; border-top: 1px dashed #E5E7EB; width: 100%; }
 
-    /* Обычные модалки */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; padding: 16px; }
+    /* Модалки с анимацией Pop-up */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-box { background: #fff; border-radius: 24px; padding: 20px; width: 100%; max-width: 400px; text-align: center; max-height: 92vh; overflow-y: auto; }
-    .modal-icon { font-size: 46px; margin-bottom: 6px; }
+    .modal-box { background: #fff; border-radius: 24px; padding: 22px; width: 100%; max-width: 400px; text-align: center; max-height: 92vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.25); animation: popModal 0.28s var(--bounce); }
+    @keyframes popModal { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+    .modal-icon { font-size: 48px; margin-bottom: 6px; }
     .modal-title { font-size: 18px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px; }
     .modal-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-    .btn-primary { background: var(--primary); color: #fff; border: none; padding: 11px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%; }
-    .btn-secondary { background: #F3F4F6; color: #4B5563; border: none; padding: 9px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 6px; }
+    .btn-primary { background: var(--primary); color: #fff; border: none; padding: 11px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.2s var(--bounce); }
+    .btn-primary:active { transform: scale(0.94); }
+    .btn-secondary { background: #F3F4F6; color: #4B5563; border: none; padding: 9px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 6px; transition: 0.2s var(--bounce); }
+    .btn-secondary:active { transform: scale(0.95); }
     
     .customizer-row { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
-    .chip { padding: 7px 12px; border: 1.5px solid #E5E7EB; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
-    .chip.active { border-color: var(--primary); background: #FFF0F5; color: var(--primary); }
+    .chip { padding: 7px 12px; border: 1.5px solid #E5E7EB; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s var(--bounce); }
+    .chip.active { border-color: var(--primary); background: #FFF0F5; color: var(--primary); transform: scale(1.05); }
   </style>
 </head>
 <body>
 
-<!-- ПОЛНОЭКРАННОЕ ПРИВЕТСТВИЕ И СОЗДАНИЕ ПЕРСОНАЖА -->
+<!-- ПОЛНОЭКРАННОЕ ПРИВЕТСТВИЕ -->
 <div class="fullscreen-onboard" id="fullscreenOnboard">
   <div class="onboard-content-wrap">
     
-    <!-- Экран 1: Вводная часть -->
+    <!-- Экран 1 -->
     <div class="onboarding-screen active" id="onboardStep1">
       <div class="onboard-icon">🌟</div>
       <span class="onboard-badge">ЛИДЕРЫ ЦИФРОВОЙ ТРАНСФОРМАЦИИ</span>
       <h2 class="onboard-title">Привет, юный финансист!</h2>
       <p class="onboard-desc">
         Добро пожаловать в игру <b>«Питомец Финни»</b>!<br><br>
-        Здесь у тебя появится свой собственный виртуальный друг. Заботясь о нём, ты на простых примерах научишься распоряжаться карманными деньгами, копить на мечту и принимать взрослые финансовые решения без риска!
+        Здесь у тебя появится свой собственный виртуальный друг. Заботясь о нём, ты на простых примерах научишься распоряжаться карманными деньгами, копить на мечту и принимать взвешенные финансовые решения без риска!
       </p>
       <button class="btn-primary" style="padding:14px; font-size:15px;" onclick="nextOnboardStep(2)">Чему я научусь? ➡️</button>
     </div>
 
-    <!-- Экран 2: Правило 3 корзин -->
+    <!-- Экран 2 -->
     <div class="onboarding-screen" id="onboardStep2">
       <div class="onboard-icon">🧺</div>
       <span class="onboard-badge">ОСНОВА ФИНГРАМОТНОСТИ</span>
@@ -172,7 +213,7 @@
       <button class="btn-primary" style="padding:14px; font-size:15px;" onclick="nextOnboardStep(3)">Выбрать питомца 🐾</button>
     </div>
 
-    <!-- Экран 3: Кастомизация питомца -->
+    <!-- Экран 3 -->
     <div class="onboarding-screen" id="onboardStep3">
       <div class="onboard-icon">🎨</div>
       <span class="onboard-badge">СОЗДАНИЕ ДРУГА</span>
@@ -200,13 +241,12 @@
 
   </div>
 
-  <!-- Обязательная авторская строчка в самом низу -->
   <div class="author-tag">
-    Ученики МАОУ ДОД Доминанта корпус 2
+    Ученики МАОУ ДОK Доминанта корпус 2
   </div>
 </div>
 
-<!-- ОСНОВНОЙ ИНТЕРФЕЙС ПРИЛОЖЕНИЯ -->
+<!-- ОСНОВНОЙ ИНТЕРФЕЙС -->
 <div class="app-container">
   <!-- Шапка -->
   <header>
@@ -224,10 +264,10 @@
     </div>
   </header>
 
-  <!-- Демо-режим -->
+  <!-- Демо-лента -->
   <div class="demo-ribbon">
     <span>🧪 ДЕМО-РЕЖИМ (5 ПЕРИОДОВ)</span>
-    <button onclick="advancePeriod()" style="background:#F59E0B; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:800; cursor:pointer;">СЛЕД. ПЕРИОД ⏩</button>
+    <button class="btn-next-period" onclick="advancePeriod()">СЛЕД. ПЕРИОД ⏩</button>
   </div>
 
   <!-- Баланс и копилка -->
@@ -253,9 +293,9 @@
     <div class="pet-stage-area">
       <div class="pet-speech" id="petSpeechBubble">«Погладь меня ладошкой по пузику! Я очень люблю ласку ❤️»</div>
       
-      <!-- 2D Персонаж (Клик = поглаживание) -->
-      <div class="pet-svg-box" id="petSvgBox" onclick="patPet(event)">
-        <!-- SVG генерируется динамически -->
+      <!-- 2D Персонаж с анимацией дыхания и моргания -->
+      <div class="pet-svg-box pet-breathe" id="petSvgBox" onclick="patPet(event)">
+        <!-- SVG генерируется скриптом -->
       </div>
       <div><span class="pet-badge" id="petMoodBadge">Любознательный 🐾</span></div>
       
@@ -286,7 +326,7 @@
 
     <!-- Финансовая цель -->
     <div class="goal-widget">
-      <div class="goal-widget-left" onclick="openGoalSelector()" style="cursor: pointer;">
+      <div class="goal-widget-left" onclick="openGoalSelector()">
         <div class="goal-icon" id="goalIcon">🚲</div>
         <div class="goal-titles">
           <h4 id="goalTitle">Новый самокат (Сменить ▾)</h4>
@@ -311,14 +351,13 @@
     <div class="shop-grid" id="shopGridContainer"></div>
   </div>
 
-  <!-- Вкладка 3: Финансовые уроки с жизнями/попытками -->
+  <!-- Вкладка 3: Финансовые уроки -->
   <div class="tab-content" id="tab-quests">
     <div class="section-title">
       <span>Финансовые ситуации</span>
       <span style="font-size: 11px; color: var(--text-muted);">3 ключевые темы</span>
     </div>
 
-    <!-- Панель попыток (жизней) -->
     <div class="attempts-bar">
       <span class="attempts-title">Твои попытки:</span>
       <div class="hearts-row" id="heartsRowContainer">❤️❤️❤️</div>
@@ -506,7 +545,7 @@
 </div>
 
 <script>
-  // 1. Звук монет (Web Audio API)
+  // Звук монет (Web Audio API)
   function playCoinSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -514,20 +553,17 @@
       const gain = audioCtx.createGain();
       osc.connect(gain);
       gain.connect(audioCtx.destination);
-      
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(987.77, audioCtx.currentTime); // B5
-      osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.08); // E6
-      
+      osc.frequency.setValueAtTime(987.77, audioCtx.currentTime);
+      osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.08);
       gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
-      
       osc.start();
       osc.stop(audioCtx.currentTime + 0.35);
     } catch(e) {}
   }
 
-  // 2. Звук поглаживания питомца (мягкий уютный перелив)
+  // Звук поглаживания
   function playPurrSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -535,23 +571,51 @@
       const gain = audioCtx.createGain();
       osc.connect(gain);
       gain.connect(audioCtx.destination);
-      
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(329.63, audioCtx.currentTime); // E4
-      osc.frequency.linearRampToValueAtTime(440.00, audioCtx.currentTime + 0.15); // A4
-      
+      osc.frequency.setValueAtTime(329.63, audioCtx.currentTime);
+      osc.frequency.linearRampToValueAtTime(440.00, audioCtx.currentTime + 0.15);
       gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-      
       osc.start();
       osc.stop(audioCtx.currentTime + 0.3);
     } catch(e) {}
   }
 
+  // Анимация взлетающих золотых монет к кошельку
+  function triggerFlyingCoins(startX, startY) {
+    const target = document.getElementById('currentBalance').getBoundingClientRect();
+    for (let i = 0; i < 4; i++) {
+      const coin = document.createElement('div');
+      coin.className = 'flying-coin';
+      coin.innerText = '🪙';
+      coin.style.left = (startX || (window.innerWidth / 2)) + 'px';
+      coin.style.top = (startY || (window.innerHeight / 2)) + 'px';
+      document.body.appendChild(coin);
+
+      setTimeout(() => {
+        coin.style.left = (target.left + 10) + 'px';
+        coin.style.top = (target.top + 5) + 'px';
+        coin.style.transform = 'scale(0.6)';
+        coin.style.opacity = '0.7';
+      }, i * 70);
+
+      setTimeout(() => {
+        coin.remove();
+        pulseBalance();
+      }, 750 + i * 70);
+    }
+  }
+
+  function pulseBalance() {
+    const el = document.getElementById('currentBalance');
+    el.classList.add('pulse');
+    setTimeout(() => el.classList.remove('pulse'), 300);
+  }
+
   const state = {
     petName: 'Финни',
-    petType: 'fox', // fox, cat, dog
-    petAcc: 'none', // none, bow, hat
+    petType: 'fox',
+    petAcc: 'none',
     stage: 1,
     period: 1,
     balance: 350,
@@ -561,7 +625,7 @@
     goalIcon: '🚲',
     satiety: 80,
     mood: 85,
-    lives: 3, // Попытки/жизни в квестах
+    lives: 3,
     budgetPlan: { mandatory: 150, optional: 100, savings: 100 },
     factSpend: { mandatory: 0, optional: 0, savings: 0 },
     stats: { mandatoryBought: 0, questsCompleted: 0, mistakesHandled: 0 },
@@ -614,44 +678,51 @@
       id: 'q6', topic: 'Платежи и покупки', title: 'Сравнение цен',
       desc: 'В одном магазине любимый корм стоит 60 монет, а в соседнем со скидкой — 40 монет.',
       optA: { text: 'Дойти до соседнего и сберечь 20 монет', correct: true, reward: 40, comment: 'Умный покупатель всегда сравнивает цены! Сэкономленные 20 монет сохранены в кошельке.' },
-      optB: { text: 'Купить сразу в первом, лень идти', correct: false, comment: 'Переплата на ровном месте. Теряется 1 попытка ❤️!' }
+      optB: { text: 'Купить сразу в первом, лень идти', correct: false, comment: 'Переплата на ровном месте. Сравнение цен экономит до трети бюджета!' }
     }
   ];
 
-  // Поглаживание питомца (мурлыканье, сердечко, +настроение)
+  // Поглаживание питомца
   function patPet(event) {
     const box = document.getElementById('petSvgBox');
-    box.classList.remove('pet-pat-anim');
+    box.classList.remove('pet-purr');
     void box.offsetWidth;
-    box.classList.add('pet-pat-anim');
+    box.classList.add('pet-purr');
 
-    // Звук
     playPurrSound();
 
-    // Рост настроения
     state.mood = Math.min(100, state.mood + 5);
     updateUI();
 
-    // Создание вылетающего сердечка в точке клика
-    const heart = document.createElement('div');
-    heart.className = 'floating-heart';
-    heart.innerText = '❤️';
-    const rect = box.getBoundingClientRect();
-    heart.style.left = (event.clientX - rect.left - 10) + 'px';
-    heart.style.top = (event.clientY - rect.top - 20) + 'px';
-    box.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 800);
+    // Генерация разноцветных вылетающих частиц
+    const particles = ['❤️', '✨', '💖', '🐾'];
+    for (let i = 0; i < 3; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.innerText = particles[Math.floor(Math.random() * particles.length)];
+      const rect = box.getBoundingClientRect();
+      p.style.left = (event.clientX - rect.left - 10) + 'px';
+      p.style.top = (event.clientY - rect.top - 10) + 'px';
+      
+      const dx = (Math.random() - 0.5) * 80 + 'px';
+      const dy = -(Math.random() * 50 + 20) + 'px';
+      p.style.setProperty('--dx', dx);
+      p.style.setProperty('--dy', dy);
+      
+      box.appendChild(p);
+      setTimeout(() => p.remove(), 850);
+    }
 
     const happyQuotes = [
       '«Муррр! Как приятно! Спасибо за заботу! ❤️»',
       '«Ура! Моё настроение поднялось до небес! ✨»',
-      '«Ты самый заботливый хозяин на свете! 🐾»'
+      '«Ты самый заботливый хозяин на свете! 🐾»',
+      '«Щёчки щекотно, но так здорово! 🦊»'
     ];
     document.getElementById('petSpeechBubble').innerText = happyQuotes[Math.floor(Math.random() * happyQuotes.length)];
   }
 
-  // 2D SVG Персонаж с лапками
+  // 2D SVG Персонаж с анимацией моргания и сидячими лапками
   function renderPetSVG(type, acc, stage) {
     let mainColor = '#FF8A00'; // Fox
     let earColor = '#E05300';
@@ -665,7 +736,7 @@
       earColor = '#92400E';
     }
 
-    let scale = (stage === 1) ? 0.85 : (stage === 2) ? 1.0 : 1.15;
+    let scale = (stage === 1) ? 0.88 : (stage === 2) ? 1.02 : 1.15;
 
     let accSvg = '';
     if (acc === 'bow') {
@@ -686,6 +757,7 @@
       <svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg">
         <g transform="scale(${scale}) translate(${(140 - 140*scale)/2}, ${(150 - 150*scale)})">
           <ellipse cx="70" cy="140" rx="48" ry="8" fill="#E2E8F0"/>
+          
           <polygon points="32,25 52,65 24,60" fill="${earColor}"/>
           <polygon points="36,34 48,62 30,58" fill="#FCE7F3"/>
           <polygon points="108,25 88,65 116,60" fill="${earColor}"/>
@@ -697,7 +769,7 @@
           <ellipse cx="70" cy="108" rx="38" ry="32" fill="${mainColor}"/>
           <ellipse cx="70" cy="112" rx="22" ry="20" fill="#FFFFFF"/>
 
-          <!-- Задние сидячие лапки -->
+          <!-- Задние лапки -->
           <ellipse cx="36" cy="132" rx="14" ry="8" fill="${mainColor}"/>
           <ellipse cx="104" cy="132" rx="14" ry="8" fill="${mainColor}"/>
           <circle cx="36" cy="132" r="4" fill="#FECDD3"/>
@@ -706,10 +778,13 @@
           <ellipse cx="70" cy="68" rx="36" ry="30" fill="${mainColor}"/>
           <path d="M 40 70 Q 70 85 70 85 Q 70 85 100 70 Q 105 85 70 95 Q 35 85 40 70 Z" fill="#FFFFFF"/>
           
-          <circle cx="56" cy="62" r="5" fill="${eyeColor}"/>
-          <circle cx="58" cy="60" r="1.8" fill="#FFFFFF"/>
-          <circle cx="84" cy="62" r="5" fill="${eyeColor}"/>
-          <circle cx="86" cy="60" r="1.8" fill="#FFFFFF"/>
+          <!-- Моргающие анимированные глазки -->
+          <g class="pet-eye">
+            <circle cx="56" cy="62" r="5" fill="${eyeColor}"/>
+            <circle cx="58" cy="60" r="1.8" fill="#FFFFFF"/>
+            <circle cx="84" cy="62" r="5" fill="${eyeColor}"/>
+            <circle cx="86" cy="60" r="1.8" fill="#FFFFFF"/>
+          </g>
 
           <polygon points="67,73 73,73 70,77" fill="#1C1D22"/>
           <path d="M 66 79 Q 70 82 74 79" stroke="#1C1D22" stroke-width="1.8" fill="none" stroke-linecap="round"/>
@@ -738,7 +813,7 @@
     renderQuests();
     updateUI();
 
-    const saved = localStorage.getItem('finny_onboarded_v2');
+    const saved = localStorage.getItem('finny_onboarded_v3');
     if (!saved) {
       document.getElementById('fullscreenOnboard').classList.add('active');
     }
@@ -763,9 +838,10 @@
 
   function finishOnboarding() {
     state.petName = document.getElementById('onboardPetNameInput').value || 'Финни';
-    localStorage.setItem('finny_onboarded_v2', 'true');
+    localStorage.setItem('finny_onboarded_v3', 'true');
     document.getElementById('fullscreenOnboard').classList.remove('active');
     playCoinSound();
+    triggerFlyingCoins();
     updateUI();
     showResult('Ура, игра началась! 🎉', `Твой питомец ${state.petName} ждёт тебя! Мы начислили стартовый баланс 350 монет.`, '🪙');
   }
@@ -782,14 +858,12 @@
     document.getElementById('goalIcon').innerText = state.goalIcon;
     document.getElementById('goalTitle').innerText = state.goalTitle + ' (Сменить ▾)';
     
-    // Отрисовка попыток/жизней
     let heartsStr = '';
     for (let i = 0; i < 3; i++) {
       heartsStr += (i < state.lives) ? '❤️' : '🤍';
     }
     document.getElementById('heartsRowContainer').innerText = heartsStr;
 
-    // Отрисовка 2D SVG питомца
     document.getElementById('petSvgBox').innerHTML = renderPetSVG(state.petType, state.petAcc, state.stage);
     document.getElementById('miniPetAvatar').innerText = (state.petType === 'fox') ? '🦊' : (state.petType === 'cat') ? '🐱' : '🐶';
 
@@ -797,7 +871,6 @@
     const periodsRem = Math.ceil(rem / 100);
     document.getElementById('goalProgressText').innerText = `${state.savings} из ${state.goalCost} 🪙 (~${periodsRem} пер.)`;
 
-    // Стадии развития
     if (state.period >= 4) {
       state.stage = 3;
       document.getElementById('headerPetStage').innerText = 'Взрослый (Период ' + state.period + ')';
@@ -812,12 +885,10 @@
       document.getElementById('petMoodBadge').innerText = 'Любознательный 🐾';
     }
 
-    // План vs Факт
     document.getElementById('pfMandatory').innerText = `План ${state.budgetPlan.mandatory} / Факт ${state.factSpend.mandatory} 🪙`;
     document.getElementById('pfOptional').innerText = `План ${state.budgetPlan.optional} / Факт ${state.factSpend.optional} 🪙`;
     document.getElementById('pfSavings').innerText = `План ${state.budgetPlan.savings} / Факт ${state.factSpend.savings} 🪙`;
 
-    // Кабинет взрослого
     document.getElementById('statMandatoryCount').innerText = state.stats.mandatoryBought;
     document.getElementById('statSavingsTotal').innerText = state.savings;
     document.getElementById('statQuestsDone').innerText = state.stats.questsCompleted + ' / ' + quests.length;
@@ -836,13 +907,13 @@
         <div class="shop-item-emoji">${item.emoji}</div>
         <div class="shop-item-name">${item.name}</div>
         <div class="shop-item-effect">${item.effect}</div>
-        <button class="btn-buy" onclick="buyItem('${item.id}')">${item.price} 🪙 Купить</button>
+        <button class="btn-buy" onclick="buyItem('${item.id}', event)">${item.price} 🪙 Купить</button>
       `;
       container.appendChild(card);
     });
   }
 
-  function buyItem(id) {
+  function buyItem(id, event) {
     const item = shopItems.find(x => x.id === id);
     if (!item) return;
 
@@ -908,7 +979,8 @@
     if (opt.correct) {
       state.balance += opt.reward || 30;
       state.stats.questsCompleted++;
-      playCoinSound(); // Звон монет
+      playCoinSound();
+      triggerFlyingCoins();
       showResult('Верно! 🎯', opt.comment + ` Начислено +${opt.reward || 30} 🪙!`, '🌟');
       const card = document.getElementById('card-' + id);
       if (card) {
@@ -931,8 +1003,9 @@
     }
     state.period++;
     state.balance += 200;
-    state.lives = 3; // Восстановление попыток в новом периоде!
+    state.lives = 3;
     playCoinSound();
+    triggerFlyingCoins();
     state.factSpend = { mandatory: 0, optional: 0, savings: 0 };
     state.satiety = Math.max(30, state.satiety - 25);
     state.mood = Math.max(30, state.mood - 20);
@@ -966,9 +1039,10 @@
     state.savings -= amt;
     state.balance += amt;
     playCoinSound();
+    triggerFlyingCoins();
     closeModal('withdrawModal');
     updateUI();
-    showResult('Средства сняты ⚠️', `Ты вернул ${amt} 🪙 в кошелёк, но срок достижения цели увеличился!`, '📉');
+    showResult('Средства сняты ⚠️️', `Ты вернул ${amt} 🪙 в кошелёк, но срок достижения цели увеличился!`, '📉');
   }
 
   function openPetCustomizer() {
@@ -1064,13 +1138,14 @@
   function rewardChildFromAdult() {
     state.balance += 50;
     playCoinSound();
+    triggerFlyingCoins();
     updateUI();
     alert('Поощрение +50 монет зачислено!');
   }
 
   function resetDemoProfile() {
     if (confirm('Сбросить весь прогресс тестового профиля?')) {
-      localStorage.removeItem('finny_onboarded_v2');
+      localStorage.removeItem('finny_onboarded_v3');
       state.stage = 1;
       state.period = 1;
       state.balance = 350;
