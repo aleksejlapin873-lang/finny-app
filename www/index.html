@@ -16,37 +16,39 @@
       --green: #10B981;
       --amber: #F59E0B;
       --blue: #3B82F6;
-      --radius: 20px;
+      --radius: 18px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg); color: var(--text-main); font-size: 16px; user-select: none; }
-    .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; position: relative; background: #fff; box-shadow: 0 0 24px rgba(0,0,0,0.06); }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg); color: var(--text-main); font-size: 15px; user-select: none; }
+    .app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background: #fff; position: relative; }
     
     /* Шапка */
-    header { padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; background: #fff; border-bottom: 1px solid #EEF2F6; position: sticky; top: 0; z-index: 20; }
-    .header-profile { display: flex; align-items: center; gap: 10px; }
-    .pet-avatar-mini { width: 42px; height: 42px; border-radius: 50%; background: #FFE6EE; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 2px solid var(--primary); }
-    .header-info h2 { font-size: 15px; font-weight: 700; color: var(--primary-dark); }
+    header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; background: #fff; border-bottom: 1px solid #EEF2F6; position: sticky; top: 0; z-index: 30; }
+    .header-profile { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .pet-avatar-mini { width: 44px; height: 44px; border-radius: 50%; background: #FFE6EE; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 2px solid var(--primary); }
+    .header-info h2 { font-size: 15px; font-weight: 800; color: var(--primary-dark); }
     .header-info p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
     .header-actions { display: flex; gap: 8px; }
-    .btn-icon { background: #F3F4F6; border: none; width: 38px; height: 38px; border-radius: 12px; font-size: 17px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
-    .btn-icon:active { transform: scale(0.92); }
+    .btn-icon { background: #F3F4F6; border: none; width: 38px; height: 38px; border-radius: 12px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
-    /* Панель баланса */
-    .balance-card { margin: 12px 16px; padding: 14px 16px; background: linear-gradient(135deg, #520978, #310F53); border-radius: var(--radius); color: #fff; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 18px rgba(82, 9, 120, 0.25); }
-    .balance-item span { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-    .balance-item h3 { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+    /* Демо-лента */
+    .demo-ribbon { background: #FEF3C7; border: 1px dashed #F59E0B; border-radius: 12px; padding: 8px 12px; font-size: 11px; color: #B45309; font-weight: 700; display: flex; justify-content: space-between; align-items: center; margin: 8px 16px 2px; }
+
+    /* Баланс */
+    .balance-card { margin: 8px 16px; padding: 14px 16px; background: linear-gradient(135deg, #520978, #310F53); border-radius: var(--radius); color: #fff; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 18px rgba(82, 9, 120, 0.22); }
+    .balance-item span { font-size: 11px; opacity: 0.8; font-weight: 600; text-transform: uppercase; }
+    .balance-item h3 { font-size: 19px; font-weight: 800; margin-top: 2px; }
     .balance-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); }
 
-    /* Главный экран и питомец */
-    .pet-stage-area { padding: 10px 16px 6px; text-align: center; }
-    .pet-visual-box { width: 140px; height: 140px; margin: 0 auto 8px; border-radius: 50%; background: radial-gradient(circle, #FFF0F5 0%, #F5E8FF 100%); border: 4px solid #FFE4ED; display: flex; align-items: center; justify-content: center; font-size: 72px; position: relative; animation: float 3s ease-in-out infinite; }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-    .pet-badge { position: absolute; bottom: 0; background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; border: 2px solid #fff; }
-    .pet-speech { background: #F3F4F6; border-radius: 16px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: #374151; display: inline-block; margin-bottom: 10px; max-width: 90%; }
+    /* Экран питомца */
+    .pet-stage-area { padding: 10px 16px 4px; text-align: center; }
+    .pet-visual-box { width: 140px; height: 140px; margin: 0 auto 8px; border-radius: 50%; background: radial-gradient(circle, #FFF0F5 0%, #F5E8FF 100%); border: 4px solid #FFE4ED; display: flex; align-items: center; justify-content: center; font-size: 70px; position: relative; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .pet-badge { position: absolute; bottom: -4px; background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; border: 2px solid #fff; }
+    .pet-speech { background: #F3F4F6; border-radius: 16px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #374151; display: inline-block; margin-bottom: 8px; max-width: 92%; }
 
-    /* Шкалы состояния */
-    .bars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 12px; }
+    /* Шкалы */
+    .bars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 10px; }
     .bar-card { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 14px; padding: 8px 12px; }
     .bar-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
     .progress-track { width: 100%; height: 8px; background: #E5E7EB; border-radius: 8px; overflow: hidden; }
@@ -54,73 +56,69 @@
     .fill-satiety { background: var(--green); }
     .fill-mood { background: var(--amber); }
 
-    /* Виджет цели */
-    .goal-widget { margin: 0 16px 14px; padding: 12px 16px; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; }
-    .goal-widget-left { display: flex; align-items: center; gap: 12px; }
-    .goal-icon { font-size: 28px; }
+    /* План vs Факт виджет */
+    .plan-fact-box { margin: 0 16px 12px; background: #FDF4FF; border: 1px solid #F0ABFC; border-radius: 16px; padding: 10px 14px; font-size: 11px; }
+    .plan-fact-row { display: flex; justify-content: space-between; margin-top: 4px; font-weight: 600; }
+
+    /* Цель */
+    .goal-widget { margin: 0 16px 12px; padding: 12px 14px; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .goal-widget-left { display: flex; align-items: center; gap: 10px; }
+    .goal-icon { font-size: 26px; }
     .goal-titles h4 { font-size: 13px; font-weight: 700; color: #1E1B4B; }
     .goal-titles p { font-size: 11px; color: #4338CA; font-weight: 600; }
-    .btn-deposit { background: #4F46E5; color: #fff; border: none; padding: 8px 14px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .goal-actions { display: flex; gap: 6px; }
+    .btn-deposit { background: #4F46E5; color: #fff; border: none; padding: 6px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .btn-withdraw { background: #E0E7FF; color: #3730A3; border: none; padding: 6px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
 
-    /* Навигация вкладками */
-    .nav-tabs { display: flex; border-top: 1px solid #EEF2F6; background: #fff; position: sticky; bottom: 0; z-index: 20; }
-    .tab-btn { flex: 1; padding: 10px 0 12px; border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; }
+    /* Вкладки */
+    .nav-tabs { display: flex; border-top: 1px solid #EEF2F6; background: #fff; position: sticky; bottom: 0; z-index: 30; }
+    .tab-btn { flex: 1; padding: 10px 0 12px; border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; }
     .tab-btn.active { color: var(--primary); }
-    .tab-btn span { font-size: 20px; }
+    .tab-btn span { font-size: 19px; }
 
-    /* Контент вкладок */
     .tab-content { display: none; padding: 12px 16px 20px; flex: 1; }
     .tab-content.active { display: block; }
-    .section-title { font-size: 16px; font-weight: 800; color: var(--text-main); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .section-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; }
 
-    /* Карточки покупок */
+    /* Сетка товаров */
     .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .shop-item { background: #fff; border: 1.5px solid #F3F4F6; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+    .shop-item { background: #fff; border: 1.5px solid #F3F4F6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
     .shop-item.mandatory { border-color: #DEF7EC; background: #FDFEFE; }
-    .shop-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
+    .shop-badge { position: absolute; top: 6px; left: 6px; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
     .badge-mand { background: #059669; color: #fff; }
     .badge-opt { background: #D97706; color: #fff; }
-    .shop-item-emoji { font-size: 38px; margin: 8px 0 4px; }
-    .shop-item-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-    .shop-item-effect { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
-    .btn-buy { width: 100%; padding: 7px 0; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
-    .btn-buy:active { opacity: 0.85; }
+    .shop-item-emoji { font-size: 34px; margin: 6px 0 2px; }
+    .shop-item-name { font-size: 12px; font-weight: 700; }
+    .shop-item-effect { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
+    .btn-buy { width: 100%; padding: 6px 0; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
 
-    /* Карточки заданий */
-    .quest-card { background: #fff; border: 1.5px solid #E5E7EB; border-radius: 16px; padding: 14px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; }
-    .quest-card.completed { border-color: #A7F3D0; background: #F0FDF4; opacity: 0.8; }
-    .quest-tag { font-size: 10px; font-weight: 800; color: #6366F1; background: #EEF2FF; padding: 2px 8px; border-radius: 6px; align-self: flex-start; }
-    .quest-title { font-size: 13px; font-weight: 700; color: #111827; }
-    .quest-reward { font-size: 12px; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 4px; }
-    .btn-quest-start { background: var(--primary-dark); color: #fff; border: none; padding: 8px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
-
-    /* Планировщик бюджета */
-    .budget-slider-box { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 14px; padding: 12px; margin-bottom: 10px; }
-    .budget-slider-title { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-    .budget-slider-title span { color: var(--primary); font-size: 14px; }
-    input[type=range] { width: 100%; height: 6px; border-radius: 4px; -webkit-appearance: none; background: #D1D5DB; }
-    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); cursor: pointer; }
+    /* Квесты */
+    .quest-card { background: #fff; border: 1.5px solid #E5E7EB; border-radius: 16px; padding: 12px; margin-bottom: 10px; }
+    .quest-card.completed { border-color: #A7F3D0; background: #F0FDF4; }
+    .quest-tag { font-size: 9px; font-weight: 800; color: #6366F1; background: #EEF2FF; padding: 2px 6px; border-radius: 6px; }
+    .quest-title { font-size: 13px; font-weight: 700; margin: 4px 0; }
+    .btn-quest-start { background: var(--primary-dark); color: #fff; border: none; padding: 7px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; }
 
     /* Модалки */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); z-index: 100; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; padding: 16px; }
     .modal-overlay.active { display: flex; }
-    .modal-box { background: #fff; border-radius: 24px; padding: 22px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); animation: pop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .modal-icon { font-size: 52px; margin-bottom: 10px; }
-    .modal-title { font-size: 18px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; }
-    .modal-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; }
-    .modal-actions { display: flex; flex-direction: column; gap: 8px; }
-    .btn-primary { background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; }
-    .btn-secondary { background: #F3F4F6; color: #4B5563; border: none; padding: 10px; border-radius: 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .modal-box { background: #fff; border-radius: 22px; padding: 20px; width: 100%; max-width: 400px; text-align: center; max-height: 90vh; overflow-y: auto; }
+    .modal-icon { font-size: 44px; margin-bottom: 8px; }
+    .modal-title { font-size: 17px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px; }
+    .modal-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+    .btn-primary { background: var(--primary); color: #fff; border: none; padding: 10px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; width: 100%; }
+    .btn-secondary { background: #F3F4F6; color: #4B5563; border: none; padding: 9px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 6px; }
     
-    .demo-ribbon { background: #FEF3C7; border: 1px dashed #F59E0B; border-radius: 12px; padding: 8px 12px; font-size: 11px; color: #B45309; font-weight: 700; display: flex; justify-content: space-between; align-items: center; margin: 8px 16px 4px; }
+    .customizer-row { display: flex; justify-content: center; gap: 10px; margin: 10px 0; }
+    .chip { padding: 6px 12px; border: 1.5px solid #E5E7EB; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .chip.active { border-color: var(--primary); background: #FFF0F5; color: var(--primary); }
   </style>
 </head>
 <body>
 <div class="app-container">
   <!-- Шапка -->
   <header>
-    <div class="header-profile" onclick="openProfileModal()">
+    <div class="header-profile" onclick="openPetCustomizer()">
       <div class="pet-avatar-mini" id="miniPetAvatar">🦊</div>
       <div class="header-info">
         <h2 id="headerPetName">Финни</h2>
@@ -128,21 +126,21 @@
       </div>
     </div>
     <div class="header-actions">
-      <button class="btn-icon" title="Справка" onclick="showHelpModal()">❓</button>
+      <button class="btn-icon" title="Справочник" onclick="openDictionaryModal()">📚</button>
       <button class="btn-icon" title="Родительский контроль" onclick="openAdultGate()">🛡️</button>
     </div>
   </header>
 
-  <!-- Индикатор Демонстрационного режима -->
+  <!-- Демо-режим -->
   <div class="demo-ribbon">
     <span>🧪 ДЕМО-РЕЖИМ (5 ПЕРИОДОВ)</span>
     <button onclick="advancePeriod()" style="background:#F59E0B; color:#fff; border:none; padding:4px 8px; border-radius:6px; font-size:10px; font-weight:800; cursor:pointer;">СЛЕД. ПЕРИОД ⏩</button>
   </div>
 
-  <!-- Баланс и накопления -->
+  <!-- Баланс и копилка -->
   <div class="balance-card">
     <div class="balance-item">
-      <span>Доступно:</span>
+      <span>Баланс:</span>
       <h3 id="currentBalance">🪙 350</h3>
     </div>
     <div class="balance-divider"></div>
@@ -157,69 +155,68 @@
     </div>
   </div>
 
-  <!-- Вкладка 1: Главная (Питомец) -->
+  <!-- Вкладка 1: Питомец -->
   <div class="tab-content active" id="tab-home">
     <div class="pet-stage-area">
-      <div class="pet-speech" id="petSpeechBubble">«Привет! Давай спланируем траты, чтобы мне хватило на вкусный корм!»</div>
+      <div class="pet-speech" id="petSpeechBubble">«Привет! Нажми на меня вверху, чтобы настроить мой вид (9 комбинаций)!»</div>
       <div class="pet-visual-box" id="petVisualBox">
         <span id="petVisualEmoji">🦊</span>
         <div class="pet-badge" id="petMoodBadge">Радостный</div>
       </div>
     </div>
 
-    <!-- Шкалы состояния -->
+    <!-- Шкалы -->
     <div class="bars-grid">
       <div class="bar-card">
-        <div class="bar-header">
-          <span>Сытость 🍖</span>
-          <span id="satietyText">80%</span>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill fill-satiety" id="satietyBar" style="width: 80%;"></div>
-        </div>
+        <div class="bar-header"><span>Сытость 🍖</span><span id="satietyText">80%</span></div>
+        <div class="progress-track"><div class="progress-fill fill-satiety" id="satietyBar" style="width: 80%;"></div></div>
       </div>
       <div class="bar-card">
-        <div class="bar-header">
-          <span>Настроение ⭐</span>
-          <span id="moodText">85%</span>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill fill-mood" id="moodBar" style="width: 85%;"></div>
-        </div>
+        <div class="bar-header"><span>Настроение ⭐</span><span id="moodText">85%</span></div>
+        <div class="progress-track"><div class="progress-fill fill-mood" id="moodBar" style="width: 85%;"></div></div>
       </div>
     </div>
 
-    <!-- Виджет цели -->
+    <!-- План vs Факт -->
+    <div class="plan-fact-box">
+      <div style="font-weight: 800; color: #86198F; margin-bottom: 2px;">📊 ПЛАН vs ФАКТ ТЕКУЩЕГО ПЕРИОДА:</div>
+      <div class="plan-fact-row"><span>Обязательные:</span><span id="pfMandatory">План 150 / Факт 0 🪙</span></div>
+      <div class="plan-fact-row"><span>Желания:</span><span id="pfOptional">План 100 / Факт 0 🪙</span></div>
+      <div class="plan-fact-row"><span>В накопления:</span><span id="pfSavings">План 100 / Факт 0 🪙</span></div>
+    </div>
+
+    <!-- Финансовая цель -->
     <div class="goal-widget">
-      <div class="goal-widget-left">
+      <div class="goal-widget-left" onclick="openGoalSelector()" style="cursor: pointer;">
         <div class="goal-icon" id="goalIcon">🚲</div>
         <div class="goal-titles">
-          <h4 id="goalTitle">Новый самокат</h4>
-          <p id="goalProgressText">100 из 500 монет</p>
+          <h4 id="goalTitle">Новый самокат (Сменить ▾)</h4>
+          <p id="goalProgressText">100 из 500 монет (срок ~3 пер.)</p>
         </div>
       </div>
-      <button class="btn-deposit" onclick="openDepositModal()">+ Отложить</button>
+      <div class="goal-actions">
+        <button class="btn-deposit" onclick="openDepositModal()">+ Копить</button>
+        <button class="btn-withdraw" onclick="openWithdrawModal()">- Снять</button>
+      </div>
     </div>
 
-    <div style="padding: 0 16px;">
-      <button class="btn-primary" style="width: 100%;" onclick="openBudgetModal()">📊 Составить план бюджета</button>
-    </div>
+    <button class="btn-primary" style="margin-top: 4px;" onclick="openBudgetModal()">⚖️ Составить план бюджета на период</button>
   </div>
 
-  <!-- Вкладка 2: Магазин трат -->
+  <!-- Вкладка 2: Расходы (8 товаров) -->
   <div class="tab-content" id="tab-shop">
     <div class="section-title">
-      <span>Магазин для питомца</span>
-      <span style="font-size: 12px; color: var(--text-muted);">8 товаров</span>
+      <span>Каталог расходов</span>
+      <span style="font-size: 11px; color: var(--text-muted);">8 позиций двух видов</span>
     </div>
     <div class="shop-grid" id="shopGridContainer"></div>
   </div>
 
-  <!-- Вкладка 3: Задания -->
+  <!-- Вкладка 3: Финансовые уроки (6 квестов) -->
   <div class="tab-content" id="tab-quests">
     <div class="section-title">
-      <span>Финансовые уроки</span>
-      <span style="font-size: 12px; color: var(--text-muted);">6 ситуаций</span>
+      <span>Финансовые ситуации</span>
+      <span style="font-size: 11px; color: var(--text-muted);">3 ключевые темы</span>
     </div>
     <div id="questsContainer"></div>
   </div>
@@ -227,85 +224,147 @@
   <!-- Вкладка 4: Прогресс -->
   <div class="tab-content" id="tab-progress">
     <div class="section-title"><span>Чему научился Финни</span></div>
-    <div class="quest-card" style="background:#fff;">
-      <h4 style="font-size:14px; font-weight:700; margin-bottom:6px;">Правило трёх корзин:</h4>
-      <p style="font-size:12px; color:#4B5563; line-height:1.5;">Сначала покупаем то, без чего нельзя обойтись (корм), потом откладываем в копилку на мечту, и только потом балуем себя вкусностями!</p>
+    <div class="quest-card">
+      <h4 style="font-size:13px; font-weight:700;">📘 Обязательное и желаемое</h4>
+      <p style="font-size:11px; color:#4B5563; margin-top:4px;">Еда и уход за питомцем жизненно необходимы, а игрушки и сладости можно отложить без риска для здоровья Финни.</p>
     </div>
-    <div class="quest-card" style="background:#fff;">
-      <h4 style="font-size:14px; font-weight:700; margin-bottom:6px;">Безопасные ошибки:</h4>
-      <p style="font-size:12px; color:#4B5563; line-height:1.5;">Если купить сразу все игрушки — не останется монет на завтрак. Финни погрустит, но ты всегда можешь выполнить новое задание и исправить баланс!</p>
+    <div class="quest-card">
+      <h4 style="font-size:13px; font-weight:700;">🌱 Рост питомца</h4>
+      <p style="font-size:11px; color:#4B5563; margin-top:4px;">Финни растет за серию периодов (Малыш → Подросток → Взрослый), если обязательный план выполнен, а накопления пополняются регулярно.</p>
     </div>
-    <button class="btn-secondary" style="width:100%; margin-top:10px;" onclick="resetDemoProfile()">Сбросить всё (Новая игра)</button>
+    <button class="btn-secondary" onclick="resetDemoProfile()">Сбросить всё (Шаг 1)</button>
   </div>
 
-  <!-- Навигация снизу -->
+  <!-- Нижняя панель -->
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="switchTab('tab-home', this)"><span>🦊</span>Питомец</button>
-    <button class="tab-btn" onclick="switchTab('tab-shop', this)"><span>🛍️</span>Расходы</button>
+    <button class="tab-btn" onclick="switchTab('tab-shop', this)"><span>🛍️</span>Покупки</button>
     <button class="tab-btn" onclick="switchTab('tab-quests', this)"><span>🎯</span>Задания</button>
     <button class="tab-btn" onclick="switchTab('tab-progress', this)"><span>🏆</span>Успехи</button>
   </div>
 </div>
 
-<!-- Модалка: План Бюджета (3 корзины) -->
-<div class="modal-overlay" id="budgetModal">
+<!-- Модалка: Кастомизация питомца (9+ комбинаций) -->
+<div class="modal-overlay" id="customizerModal">
   <div class="modal-box">
-    <div class="modal-icon">⚖️</div>
-    <h3 class="modal-title">План на период</h3>
-    <p class="modal-desc">Распредели доступные <b id="budgetTotalCap">350 монет</b> по трём корзинам:</p>
+    <h3 class="modal-title">Настройка питомца</h3>
+    <p class="modal-desc">Выбери вид питомца, аксессуар и дай ему имя (более 9 комбинаций):</p>
+    <input type="text" id="inputPetName" value="Финни" style="width:80%; padding:8px; border:1px solid #D1D5DB; border-radius:10px; text-align:center; font-weight:700; margin-bottom:10px;">
     
-    <div class="budget-slider-box">
-      <div class="budget-slider-title"><span>🍖 Обязательные (еда, уход)</span><span id="valMandatory">150</span></div>
-      <input type="range" id="rangeMandatory" min="50" max="300" step="10" value="150" oninput="recalcBudget()">
+    <p style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px;">ПЕРСОНАЖ:</p>
+    <div class="customizer-row" id="petTypeSelector">
+      <div class="chip active" onclick="selectPetType('🦊', this)">Лисёнок 🦊</div>
+      <div class="chip" onclick="selectPetType('🐱', this)">Котёнок 🐱</div>
+      <div class="chip" onclick="selectPetType('🐶', this)">Щенок 🐶</div>
     </div>
-    <div class="budget-slider-box">
-      <div class="budget-slider-title"><span>🎮 Желания (игрушки, декор)</span><span id="valOptional">100</span></div>
-      <input type="range" id="rangeOptional" min="0" max="250" step="10" value="100" oninput="recalcBudget()">
+
+    <p style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px;">АКСЕССУАР:</p>
+    <div class="customizer-row" id="petAccSelector">
+      <div class="chip active" onclick="selectPetAcc('', this)">Без всего</div>
+      <div class="chip" onclick="selectPetAcc('🎀', this)">Бантик 🎀</div>
+      <div class="chip" onclick="selectPetAcc('🎩', this)">Цилиндр 🎩</div>
     </div>
-    <div class="budget-slider-box">
-      <div class="budget-slider-title"><span>🏦 В копилку на цель</span><span id="valSavings">100</span></div>
-      <input type="range" id="rangeSavings" min="0" max="200" step="10" value="100" oninput="recalcBudget()">
-    </div>
-    <p id="budgetSumCheck" style="font-size:12px; font-weight:700; color:#059669; margin-bottom:12px;">Сумма: 350 из 350</p>
-    <div class="modal-actions">
-      <button class="btn-primary" onclick="confirmBudgetPlan()">Утвердить план</button>
-      <button class="btn-secondary" onclick="closeModal('budgetModal')">Закрыть</button>
-    </div>
+
+    <button class="btn-primary" onclick="savePetCustomization()">Сохранить вид</button>
   </div>
 </div>
 
-<!-- Модалка: Выполнение задания -->
+<!-- Модалка: Выбор цели накоплений (минимум 3 цели) -->
+<div class="modal-overlay" id="goalModal">
+  <div class="modal-box">
+    <h3 class="modal-title">Выбор цели накопления</h3>
+    <p class="modal-desc">Выбери предмет с понятной стоимостью:</p>
+    <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+      <button class="chip active" style="padding:10px;" onclick="setGoal('Новый самокат', 500, '🚲')">🚲 Новый самокат — 500 🪙</button>
+      <button class="chip" style="padding:10px;" onclick="setGoal('Робот-конструктор', 400, '🤖')">🤖 Робот-конструктор — 400 🪙</button>
+      <button class="chip" style="padding:10px;" onclick="setGoal('Билет в Аквапарк', 300, '🎟️')">🎟️ Билет в Аквапарк — 300 🪙</button>
+    </div>
+    <button class="btn-secondary" onclick="closeModal('goalModal')">Отмена</button>
+  </div>
+</div>
+
+<!-- Модалка: Снятие средств с цели (п. 2.5.7 ТЗ с подтверждением и пересчетом срока) -->
+<div class="modal-overlay" id="withdrawModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <h3 class="modal-title">Снятие из копилки</h3>
+    <p class="modal-desc">Если снять монеты из копилки, накопленная сумма уменьшится, а срок достижения цели отодвинется дальше на 1–2 периода!</p>
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <button class="btn-secondary" onclick="confirmWithdraw(30)">Снять 30 🪙</button>
+      <button class="btn-secondary" onclick="confirmWithdraw(50)">Снять 50 🪙</button>
+    </div>
+    <button class="btn-primary" onclick="closeModal('withdrawModal')">Отмена (Сохранить мечту)</button>
+  </div>
+</div>
+
+<!-- Модалка: Справочник финансовых терминов (п. 2.5.11 ТЗ) -->
+<div class="modal-overlay" id="dictionaryModal">
+  <div class="modal-box" style="text-align:left;">
+    <h3 class="modal-title" style="text-align:center;">📚 Справочник терминов</h3>
+    <p style="font-size:11px; margin-bottom:8px;"><b>Обязательные расходы:</b> товары и действия, без которых питомец не может быть сытым и здоровым (корм, уход).</p>
+    <p style="font-size:11px; margin-bottom:8px;"><b>Необязательные расходы:</b> вещи для настроения и игры (игрушки, наряды). Отказ от них допустим и не считается ошибкой.</p>
+    <p style="font-size:11px; margin-bottom:8px;"><b>План бюджета:</b> распределение монет до начала трат по 3 корзинам.</p>
+    <p style="font-size:11px; margin-bottom:12px;"><b>Финансовая цель:</b> важная мечта, ради которой мы регулярно откладываем в копилку.</p>
+    <button class="btn-primary" onclick="closeModal('dictionaryModal')">Понятно</button>
+  </div>
+</div>
+
+<!-- Модалка: Бюджет 3 корзины -->
+<div class="modal-overlay" id="budgetModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚖️</div>
+    <h3 class="modal-title">План личного бюджета</h3>
+    <p class="modal-desc">Распредели доступные <b id="budgetTotalCap">350 монет</b> по 3 корзинам:</p>
+    <div style="margin-bottom:8px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700;"><span>🍖 Обязательные:</span><span id="valMandatory">150</span></div>
+      <input type="range" id="rangeMandatory" min="50" max="300" step="10" value="150" oninput="recalcBudget()" style="width:100%;">
+    </div>
+    <div style="margin-bottom:8px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700;"><span>🎮 Желания:</span><span id="valOptional">100</span></div>
+      <input type="range" id="rangeOptional" min="0" max="250" step="10" value="100" oninput="recalcBudget()" style="width:100%;">
+    </div>
+    <div style="margin-bottom:8px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700;"><span>🏦 В копилку:</span><span id="valSavings">100</span></div>
+      <input type="range" id="rangeSavings" min="0" max="200" step="10" value="100" oninput="recalcBudget()" style="width:100%;">
+    </div>
+    <p id="budgetSumCheck" style="font-size:11px; font-weight:700; color:#059669; margin-bottom:12px;">Сумма: 350 из 350</p>
+    <button class="btn-primary" onclick="confirmBudgetPlan()">Утвердить план</button>
+    <button class="btn-secondary" onclick="closeModal('budgetModal')">Закрыть</button>
+  </div>
+</div>
+
+<!-- Модалка: Задание -->
 <div class="modal-overlay" id="questModal">
   <div class="modal-box">
     <div class="modal-icon" id="qModalIcon">💡</div>
     <h3 class="modal-title" id="qModalTitle">Ситуация</h3>
-    <p class="modal-desc" id="qModalDesc">Текст задания...</p>
-    <div class="modal-actions" id="qModalButtons"></div>
+    <p class="modal-desc" id="qModalDesc">Текст ситуации...</p>
+    <div id="qModalButtons" style="display:flex; flex-direction:column; gap:8px;"></div>
   </div>
 </div>
 
-<!-- Модалка: Результат решения -->
+<!-- Модалка: Результат -->
 <div class="modal-overlay" id="resultModal">
   <div class="modal-box">
     <div class="modal-icon" id="resIcon">🎉</div>
     <h3 class="modal-title" id="resTitle">Отлично!</h3>
-    <p class="modal-desc" id="resDesc">Объяснение...</p>
+    <p class="modal-desc" id="resDesc">Описание</p>
     <button class="btn-primary" onclick="closeModal('resultModal')">Понятно</button>
   </div>
 </div>
 
-<!-- Модалка: Пополнение копилки -->
+<!-- Модалка: Депозит -->
 <div class="modal-overlay" id="depositModal">
   <div class="modal-box">
     <div class="modal-icon">🏦</div>
     <h3 class="modal-title">Отложить в копилку</h3>
     <p class="modal-desc">Сколько монет перевести на мечту?</p>
-    <div style="display:flex; justify-content:center; gap:8px; margin-bottom:16px;">
+    <div style="display:flex; justify-content:center; gap:8px; margin-bottom:14px;">
       <button class="btn-secondary" onclick="depositSavings(20)">+20 🪙</button>
       <button class="btn-secondary" onclick="depositSavings(50)">+50 🪙</button>
       <button class="btn-secondary" onclick="depositSavings(100)">+100 🪙</button>
     </div>
-    <button class="btn-secondary" style="width:100%;" onclick="closeModal('depositModal')">Отмена</button>
+    <button class="btn-secondary" onclick="closeModal('depositModal')">Отмена</button>
   </div>
 </div>
 
@@ -315,11 +374,9 @@
     <div class="modal-icon">🔒</div>
     <h3 class="modal-title">Раздел для взрослых</h3>
     <p class="modal-desc">Для входа решите пример:<br><b id="mathQuestion" style="font-size:18px; color:var(--primary-dark);">7 × 8 = ?</b></p>
-    <input type="number" id="mathAnswerInput" placeholder="Ответ" style="width:120px; padding:8px; text-align:center; font-size:18px; border:1px solid #D1D5DB; border-radius:10px; margin-bottom:14px;">
-    <div class="modal-actions">
-      <button class="btn-primary" onclick="checkAdultGate()">Войти</button>
-      <button class="btn-secondary" onclick="closeModal('adultGateModal')">Назад</button>
-    </div>
+    <input type="number" id="mathAnswerInput" placeholder="Ответ" style="width:110px; padding:8px; text-align:center; font-size:18px; border:1px solid #D1D5DB; border-radius:10px; margin-bottom:12px;">
+    <button class="btn-primary" onclick="checkAdultGate()">Войти</button>
+    <button class="btn-secondary" onclick="closeModal('adultGateModal')">Назад</button>
   </div>
 </div>
 
@@ -327,103 +384,89 @@
 <div class="modal-overlay" id="adultCabinetModal">
   <div class="modal-box" style="text-align:left;">
     <h3 class="modal-title" style="text-align:center;">🛡️ Родительский кабинет</h3>
-    <p style="font-size:12px; color:#4B5563; margin-bottom:10px;">Просветительский трекер успехов ребёнка:</p>
-    <ul style="font-size:12px; line-height:1.8; color:#1F2937; margin-bottom:16px; padding-left:18px;">
-      <li>Освоено обязательных трат: <b id="statMandatoryCount">0</b></li>
-      <li>Отложено в сбережения: <b id="statSavingsTotal">100</b> монет</li>
-      <li>Пройдено фин. ситуаций: <b id="statQuestsDone">0 / 6</b></li>
-      <li>Ошибок без стресса (обучение): <b id="statMistakesCount">0</b></li>
+    <p style="font-size:11px; color:#4B5563; margin-bottom:10px;">Просветительский трекер успехов ребёнка:</p>
+    <ul style="font-size:11px; line-height:1.7; color:#1F2937; margin-bottom:14px; padding-left:16px;">
+      <li>Куплено обязательных вещей: <b id="statMandatoryCount">0</b></li>
+      <li>Сумма в сбережениях: <b id="statSavingsTotal">100</b> монет</li>
+      <li>Решено ситуаций: <b id="statQuestsDone">0 / 6</b></li>
+      <li>Безопасных ошибок разобрано: <b id="statMistakesCount">0</b></li>
     </ul>
-    <div class="modal-actions">
-      <button class="btn-primary" onclick="rewardChildFromAdult()">Поощрить ребёнка (+50 монет)</button>
-      <button class="btn-secondary" onclick="resetDemoProfile()">Сбросить профиль к началу</button>
-      <button class="btn-secondary" onclick="closeModal('adultCabinetModal')">Закрыть</button>
-    </div>
+    <button class="btn-primary" onclick="rewardChildFromAdult()">Поощрить (+50 монет)</button>
+    <button class="btn-secondary" onclick="resetDemoProfile()">Сбросить профиль к началу</button>
+    <button class="btn-secondary" onclick="closeModal('adultCabinetModal')">Закрыть</button>
   </div>
 </div>
 
 <script>
-  // Игровое состояние
   const state = {
     petName: 'Финни',
-    petEmoji: '🦊',
-    stage: 1, // 1: Малыш, 2: Подросток, 3: Взрослый
+    petType: '🦊',
+    petAcc: '',
+    stage: 1,
     period: 1,
     balance: 350,
     savings: 100,
+    goalTitle: 'Новый самокат',
     goalCost: 500,
+    goalIcon: '🚲',
     satiety: 80,
     mood: 85,
     budgetPlan: { mandatory: 150, optional: 100, savings: 100 },
+    factSpend: { mandatory: 0, optional: 0, savings: 0 },
     stats: { mandatoryBought: 0, questsCompleted: 0, mistakesHandled: 0 },
     mathCorrect: 56
   };
 
-  // 8 товаров (4 обязательных + 4 необязательных)
   const shopItems = [
     { id: 'food_1', name: 'Полезная каша', price: 40, type: 'mand', emoji: '🥣', effect: '+25% к сытости', satiety: 25, mood: 5 },
     { id: 'food_2', name: 'Свежие яблоки', price: 60, type: 'mand', emoji: '🍎', effect: '+35% к сытости', satiety: 35, mood: 10 },
-    { id: 'care_1', name: 'Шампунь и расческа', price: 50, type: 'mand', emoji: '🧼', effect: '+15% ухода и здоровья', satiety: 10, mood: 20 },
+    { id: 'care_1', name: 'Шампунь и расческа', price: 50, type: 'mand', emoji: '🧼', effect: '+15% ухода', satiety: 10, mood: 20 },
     { id: 'care_2', name: 'Витамины роста', price: 80, type: 'mand', emoji: '💊', effect: '+30% к развитию', satiety: 20, mood: 25 },
-    { id: 'toy_1', name: 'Резиновый мячик', price: 70, type: 'opt', emoji: '🎾', effect: '+30% к настроению', satiety: -5, mood: 30 },
-    { id: 'toy_2', name: 'Стильный шарфик', price: 90, type: 'opt', emoji: '🧣', effect: '+40% к настроению', satiety: 0, mood: 40 },
-    { id: 'fun_1', name: 'Мыльные пузыри', price: 45, type: 'opt', emoji: '🫧', effect: '+20% к настроению', satiety: 0, mood: 20 },
+    { id: 'toy_1', name: 'Резиновый мячик', price: 70, type: 'opt', emoji: '🎾', effect: '+30% настроения', satiety: -5, mood: 30 },
+    { id: 'toy_2', name: 'Стильный шарфик', price: 90, type: 'opt', emoji: '🧣', effect: '+40% настроения', satiety: 0, mood: 40 },
+    { id: 'fun_1', name: 'Мыльные пузыри', price: 45, type: 'opt', emoji: '🫧', effect: '+20% настроения', satiety: 0, mood: 20 },
     { id: 'fun_2', name: 'Леденец-петушок', price: 35, type: 'opt', emoji: '🍭', effect: '+15% к радости', satiety: 5, mood: 15 }
   ];
 
-  // 6 заданий по 3 темам рамки компетенций
   const quests = [
     {
-      id: 'q1',
-      topic: 'Планирование бюджета',
-      title: 'Карманные деньги на неделю',
+      id: 'q1', topic: 'Планирование бюджета', title: 'Карманные деньги на неделю',
       desc: 'Тебе выдали 100 монет на всю неделю. Друг зовёт сразу купить огромную сладкую вату за 90 монет. Что решишь?',
-      optA: { text: 'Купить сладость на все монеты', correct: false, comment: 'Ой! На сладость ушли почти все монеты, и на обеды в школе ничего не осталось. Ошибка — отличный урок: раздели бюджет заранее!' },
-      optB: { text: 'Купить маленькую порцию за 30, а 70 отложить', correct: true, reward: 40, comment: 'Супер! Ты и полакомился, и сохранил деньги на школьные обеды и копилку.' }
+      optA: { text: 'Купить сладость на все монеты', correct: false, comment: 'Ой! На сладость ушли почти все монеты, и на обеды ничего не осталось. Разделяй бюджет заранее!' },
+      optB: { text: 'Купить маленькую за 30, а 70 отложить', correct: true, reward: 40, comment: 'Супер! Ты и полакомился, и сберёг монеты на важные вещи.' }
     },
     {
-      id: 'q2',
-      topic: 'Формирование накоплений',
-      title: 'Сдача в магазине',
-      desc: 'После покупки полезного корма у тебя осталась сдача 30 монет. Как поступить?',
-      optA: { text: 'Сразу бросить в копилку на самокат', correct: true, reward: 30, comment: 'Идеальное решение! Регулярные маленькие суммы быстрее всего приближают к большой цели.' },
-      optB: { text: 'Купить случайную наклейку у кассы', correct: false, comment: 'Наклейка быстро потерялась, а мечта о самокате осталась дальше. В следующий раз лучше пополнить копилку.' }
+      id: 'q2', topic: 'Формирование накоплений', title: 'Сдача в магазине',
+      desc: 'После покупки корма осталась сдача 30 монет. Как поступить?',
+      optA: { text: 'Бросить в копилку на цель', correct: true, reward: 30, comment: 'Отлично! Регулярные маленькие суммы быстрее всего приближают к большой цели.' },
+      optB: { text: 'Купить случайную наклейку у кассы', correct: false, comment: 'Наклейка быстро потерялась, а мечта осталась дальше. Лучше копить!' }
     },
     {
-      id: 'q3',
-      topic: 'Платежи и покупки',
-      title: 'Поход в зоомагазин со списком',
-      desc: 'Ты пришёл за кормом для Финни со списком покупок. На витрине мерцает яркая светящаяся шапка.',
+      id: 'q3', topic: 'Платежи и покупки', title: 'Поход в магазин со списком',
+      desc: 'Ты пришёл за кормом со списком. На витрине мерцает яркая светящаяся шапка.',
       optA: { text: 'Сначала купить корм по списку', correct: true, reward: 35, comment: 'Отличная финансовая дисциплина! Обязательные расходы всегда идут первыми.' },
-      optB: { text: 'Взять шапку, а корм купить как-нибудь потом', correct: false, comment: 'Финни остался голодным, потому что на корм не хватило монет. Список покупок бережет кошелек!' }
+      optB: { text: 'Взять шапку, а корм как-нибудь потом', correct: false, comment: 'Питомец остался голодным, так как на корм не хватило монет. Список покупок бережёт бюджет!' }
     },
     {
-      id: 'q4',
-      topic: 'Планирование бюджета',
-      title: 'Непредвиденные расходы',
-      desc: 'У Финни сломался поводок. Это непредвиденный, но обязательный расход (50 монет). Откуда взять монеты?',
-      optA: { text: 'Отказаться от необязательной игрушки', correct: true, reward: 45, comment: 'Мудрый выбор! Жертвовать развлечениями ради необходимого — признак взрослого финансиста.' },
-      optB: { text: 'Разбить всю копилку на мечту', correct: false, comment: 'Копилку лучше беречь для цели. Сначала сокращают развлечения текущего периода.' }
+      id: 'q4', topic: 'Планирование бюджета', title: 'Непредвиденные расходы',
+      desc: 'У питомца сломался ошейник. Это непредвиденный, но обязательный расход (50 монет).',
+      optA: { text: 'Отказаться от необязательной игрушки', correct: true, reward: 45, comment: 'Мудрый выбор! Жертвовать развлечениями ради необходимого — признак финансовой зрелости.' },
+      optB: { text: 'Разбить всю копилку', correct: false, comment: 'Копилку лучше беречь для главной цели. Сначала сокращают развлечения текущего периода.' }
     },
     {
-      id: 'q5',
-      topic: 'Формирование накоплений',
-      title: 'Подарок на день рождения',
-      desc: 'Бабушка подарила тебе 150 монет. Как распределить такой большой доход?',
-      optA: { text: '50% в копилку, 30% на Финни, 20% на радости', correct: true, reward: 50, comment: 'Золотое правило распределения подарков! Финни счастлив, а цель уже совсем близко.' },
-      optB: { text: 'Потратить всё за 5 минут в парке', correct: false, comment: 'Деньги растаяли как дым. Подарки приносят больше пользы, если часть отложить.' }
+      id: 'q5', topic: 'Формирование накоплений', title: 'Подарок на праздник',
+      desc: 'Тебе подарили 150 монет. Как распределить такой большой доход?',
+      optA: { text: '50% в копилку, 30% на питомца, 20% на радости', correct: true, reward: 50, comment: 'Золотое правило распределения доходов! Питомец доволен, а цель совсем близко.' },
+      optB: { text: 'Потратить всё за 5 минут', correct: false, comment: 'Деньги растаяли как дым. Подарки приносят пользу, если часть отложить.' }
     },
     {
-      id: 'q6',
-      topic: 'Платежи и покупки',
-      title: 'Сравнение цен',
-      desc: 'В одном магазине любимый корм Финни стоит 60 монет, а в соседнем со скидкой — 40 монет. Что сделаешь?',
-      optA: { text: 'Дойти до соседнего магазина и сберечь 20 монет', correct: true, reward: 40, comment: 'Умный покупатель всегда сравнивает цены! Сэкономленные 20 монет идут в твой баланс.' },
-      optB: { text: 'Купить сразу в первом, лень идти', correct: false, comment: 'Переплата на ровном месте. Сравнение цен позволяет сохранить до 30% личного бюджета.' }
+      id: 'q6', topic: 'Платежи и покупки', title: 'Сравнение цен',
+      desc: 'В одном магазине любимый корм стоит 60 монет, а в соседнем со скидкой — 40 монет.',
+      optA: { text: 'Дойти до соседнего и сберечь 20 монет', correct: true, reward: 40, comment: 'Умный покупатель всегда сравнивает цены! Сэкономленные 20 монет сохранены в кошельке.' },
+      optB: { text: 'Купить сразу в первом, лень идти', correct: false, comment: 'Переплата на ровном месте. Сравнение цен экономит до трети бюджета!' }
     }
   ];
 
-  // Инициализация интерфейса
   function initApp() {
     renderShop();
     renderQuests();
@@ -438,27 +481,37 @@
     document.getElementById('moodText').innerText = state.mood + '%';
     document.getElementById('satietyBar').style.width = state.satiety + '%';
     document.getElementById('moodBar').style.width = state.mood + '%';
-    document.getElementById('goalProgressText').innerText = state.savings + ' из ' + state.goalCost + ' монет';
+    document.getElementById('headerPetName').innerText = state.petName;
+    document.getElementById('petVisualEmoji').innerText = state.petType + state.petAcc;
+    document.getElementById('miniPetAvatar').innerText = state.petType;
+    document.getElementById('goalIcon').innerText = state.goalIcon;
+    document.getElementById('goalTitle').innerText = state.goalTitle + ' (Сменить ▾)';
+    
+    const rem = Math.max(0, state.goalCost - state.savings);
+    const periodsRem = Math.ceil(rem / 100);
+    document.getElementById('goalProgressText').innerText = `${state.savings} из ${state.goalCost} 🪙 (~${periodsRem} пер.)`;
 
-    // Обновление стадии роста питомца
+    // Стадии развития питомца (п. 2.5.10 ТЗ)
     if (state.period >= 4) {
       state.stage = 3;
       document.getElementById('headerPetStage').innerText = 'Взрослый (Период ' + state.period + ')';
-      document.getElementById('petVisualEmoji').innerText = '🦊✨';
-      document.getElementById('miniPetAvatar').innerText = '🦊';
+      document.getElementById('petMoodBadge').innerText = 'Мудрый 🎓';
     } else if (state.period >= 2) {
       state.stage = 2;
       document.getElementById('headerPetStage').innerText = 'Подросток (Период ' + state.period + ')';
-      document.getElementById('petVisualEmoji').innerText = '🦊';
-      document.getElementById('miniPetAvatar').innerText = '🦊';
+      document.getElementById('petMoodBadge').innerText = 'Энергичный ⚡';
     } else {
       state.stage = 1;
       document.getElementById('headerPetStage').innerText = 'Малыш (Период 1)';
-      document.getElementById('petVisualEmoji').innerText = '🐾';
-      document.getElementById('miniPetAvatar').innerText = '🐾';
+      document.getElementById('petMoodBadge').innerText = 'Любознательный 🐾';
     }
 
-    // Статистика для кабинета взрослого
+    // План vs Факт
+    document.getElementById('pfMandatory').innerText = `План ${state.budgetPlan.mandatory} / Факт ${state.factSpend.mandatory} 🪙`;
+    document.getElementById('pfOptional').innerText = `План ${state.budgetPlan.optional} / Факт ${state.factSpend.optional} 🪙`;
+    document.getElementById('pfSavings').innerText = `План ${state.budgetPlan.savings} / Факт ${state.factSpend.savings} 🪙`;
+
+    // Кабинет взрослого
     document.getElementById('statMandatoryCount').innerText = state.stats.mandatoryBought;
     document.getElementById('statSavingsTotal').innerText = state.savings;
     document.getElementById('statQuestsDone').innerText = state.stats.questsCompleted + ' / ' + quests.length;
@@ -488,21 +541,25 @@
     if (!item) return;
 
     if (state.balance < item.price) {
-      // Безопасная ошибка: объяснение нехватки средств
       state.stats.mistakesHandled++;
-      showResult('Не хватает монет! 💡', `Тебе нужно ${item.price} монет, а доступно только ${state.balance}. Выполни задание или перенеси покупку желаний на следующий период!`, '🪙');
-      document.getElementById('petSpeechBubble').innerText = '«Ничего страшного! Давай выполним задание во вкладке "Задания" и заработаем монет!»';
+      showResult('Не хватает монет! 💡', `Нужно ${item.price} монет, а доступно ${state.balance}. Выполни задание или перенеси покупку желания на следующий период!`, '🪙');
+      document.getElementById('petSpeechBubble').innerText = '«Ничего страшного! Ошибки учат нас быть внимательнее к бюджету!»';
       return;
     }
 
     state.balance -= item.price;
     state.satiety = Math.min(100, Math.max(10, state.satiety + item.satiety));
     state.mood = Math.min(100, Math.max(10, state.mood + item.mood));
-    if (item.type === 'mand') state.stats.mandatoryBought++;
+    
+    if (item.type === 'mand') {
+      state.factSpend.mandatory += item.price;
+      state.stats.mandatoryBought++;
+    } else {
+      state.factSpend.optional += item.price;
+    }
 
     updateUI();
-    showResult('Покупка совершена! ✨', `Финни получил ${item.name}! Сытость и настроение улучшились.`, item.emoji);
-    document.getElementById('petSpeechBubble').innerText = '«Спасибо! Забота обо мне делает меня сильнее и счастливее!»';
+    showResult('Покупка совершена! ✨', `Финни получил ${item.name}! Показатели обновлены.`, item.emoji);
   }
 
   function renderQuests() {
@@ -515,7 +572,6 @@
       card.innerHTML = `
         <span class="quest-tag">${q.topic}</span>
         <div class="quest-title">${q.title}</div>
-        <div class="quest-reward">+ монеты за решение 🪙</div>
         <button class="btn-quest-start" onclick="openQuest('${q.id}')">Решить ситуацию</button>
       `;
       container.appendChild(card);
@@ -525,10 +581,8 @@
   function openQuest(id) {
     const q = quests.find(x => x.id === id);
     if (!q) return;
-    document.getElementById('qModalIcon').innerText = '💡';
     document.getElementById('qModalTitle').innerText = q.title;
     document.getElementById('qModalDesc').innerText = q.desc;
-    
     const btns = document.getElementById('qModalButtons');
     btns.innerHTML = `
       <button class="btn-primary" onclick="answerQuest('${q.id}', 'A')">${q.optA.text}</button>
@@ -541,11 +595,10 @@
     closeModal('questModal');
     const q = quests.find(x => x.id === id);
     const opt = (choice === 'A') ? q.optA : q.optB;
-    
     if (opt.correct) {
       state.balance += opt.reward || 30;
       state.stats.questsCompleted++;
-      showResult('Верное решение! 🎯', opt.comment + ` Начислено +${opt.reward || 30} монет!`, '🌟');
+      showResult('Верно! 🎯', opt.comment + ` Начислено +${opt.reward || 30} 🪙!`, '🌟');
       const card = document.getElementById('card-' + id);
       if (card) {
         card.classList.add('completed');
@@ -561,33 +614,84 @@
 
   function advancePeriod() {
     if (state.period >= 5) {
-      showResult('Цикл завершён! 🏆', 'Ты успешно прошёл все 5 демонстрационных периодов! Финни вырос и накопил финансовую мудрость.', '🦊🎓');
+      showResult('Цикл завершён! 🏆', 'Ты успешно прошёл 5 демонстрационных периодов! Финни вырос во взрослого и мудрого лисёнка.', '🦊🎓');
       return;
     }
     state.period++;
-    state.balance += 200; // Новый доход за период
+    state.balance += 200;
+    state.factSpend = { mandatory: 0, optional: 0, savings: 0 };
     state.satiety = Math.max(30, state.satiety - 25);
     state.mood = Math.max(30, state.mood - 20);
     updateUI();
-    showResult(`Новый период #${state.period}! ☀️`, `Тебе начислен доход +200 монет! Не забудь накормить Финни обязательным кормом и пополнить копилку.`, '📅');
-    document.getElementById('petSpeechBubble').innerText = '«Наступил новый игровой период! Давай сначала купим еду, а остаток сбережём!»';
+    showResult(`Новый период #${state.period}! ☀️`, `Тебе начислен доход +200 монет! Не забудь обеспечить обязательные траты.`, '📅');
   }
 
   function depositSavings(amt) {
     if (state.balance < amt) {
-      alert('Недостаточно доступных монет для перевода в копилку!');
+      alert('Недостаточно монет для перевода!');
       return;
     }
     state.balance -= amt;
     state.savings += amt;
+    state.factSpend.savings += amt;
     closeModal('depositModal');
     updateUI();
     if (state.savings >= state.goalCost) {
-      showResult('ЦЕЛЬ ДОСТИГНУТА! 🎉', `Ура! Ты накопил ${state.savings} монет и купил Новый самокат! Финни гордится тобой!`, '🚲🏆');
+      showResult('ЦЕЛЬ ДОСТИГНУТА! 🎉', `Ты накопил на ${state.goalTitle}! Финни гордится тобой!`, state.goalIcon);
     } else {
-      showResult('Копилка пополнена! 🏦', `Отложено +${amt} монет. До цели осталось всего ${state.goalCost - state.savings} монет!`, '💰');
+      showResult('Копилка пополнена! 🏦', `Отложено +${amt} монет.`, '💰');
     }
   }
+
+  function confirmWithdraw(amt) {
+    if (state.savings < amt) {
+      alert('В копилке нет столько монет!');
+      return;
+    }
+    state.savings -= amt;
+    state.balance += amt;
+    closeModal('withdrawModal');
+    updateUI();
+    showResult('Средства сняты ⚠️', `Ты вернул ${amt} 🪙 в кошелёк, но срок достижения цели увеличился!`, '📉');
+  }
+
+  function openPetCustomizer() {
+    document.getElementById('inputPetName').value = state.petName;
+    openModal('customizerModal');
+  }
+
+  function selectPetType(emoji, el) {
+    state.petType = emoji;
+    document.querySelectorAll('#petTypeSelector .chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function selectPetAcc(acc, el) {
+    state.petAcc = acc;
+    document.querySelectorAll('#petAccSelector .chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function savePetCustomization() {
+    state.petName = document.getElementById('inputPetName').value || 'Финни';
+    closeModal('customizerModal');
+    updateUI();
+    showResult('Образ обновлен! ✨', `Питомец ${state.petName} готов к новым финансовым приключениям!`, state.petType);
+  }
+
+  function openGoalSelector() { openModal('goalModal'); }
+  function setGoal(name, cost, icon) {
+    state.goalTitle = name;
+    state.goalCost = cost;
+    state.goalIcon = icon;
+    closeModal('goalModal');
+    updateUI();
+    showResult('Цель изменена! 🎯', `Новая цель: ${name} (${cost} монет)`, icon);
+  }
+
+  function openDictionaryModal() { openModal('dictionaryModal'); }
+  function openWithdrawModal() { openModal('withdrawModal'); }
+  function openDepositModal() { openModal('depositModal'); }
 
   function recalcBudget() {
     const m = parseInt(document.getElementById('rangeMandatory').value);
@@ -599,12 +703,7 @@
     const total = m + o + s;
     const checkEl = document.getElementById('budgetSumCheck');
     checkEl.innerText = `Сумма плана: ${total} из ${state.balance}`;
-    if (total > state.balance) {
-      checkEl.style.color = '#DC2626';
-      checkEl.innerText += ' (Превышение лимита!)';
-    } else {
-      checkEl.style.color = '#059669';
-    }
+    checkEl.style.color = (total > state.balance) ? '#DC2626' : '#059669';
   }
 
   function confirmBudgetPlan() {
@@ -612,12 +711,19 @@
     const o = parseInt(document.getElementById('rangeOptional').value);
     const s = parseInt(document.getElementById('rangeSavings').value);
     if ((m + o + s) > state.balance) {
-      alert('Сумма расходов превышает твой доступный бюджет! Уменьши одну из категорий.');
+      alert('Сумма превышает доступный баланс!');
       return;
     }
     state.budgetPlan = { mandatory: m, optional: o, savings: s };
     closeModal('budgetModal');
-    showResult('План утвержден! 📋', `Обязательно: ${m}, Желания: ${o}, Копилка: ${s}. Сравнивай свои траты с этим планом!`, '✅');
+    updateUI();
+    showResult('План утвержден! 📋', `Обязательно: ${m}, Желания: ${o}, Копилка: ${s}`, '✅');
+  }
+
+  function openBudgetModal() {
+    document.getElementById('budgetTotalCap').innerText = state.balance + ' монет';
+    recalcBudget();
+    openModal('budgetModal');
   }
 
   function openAdultGate() {
@@ -635,29 +741,30 @@
       closeModal('adultGateModal');
       openModal('adultCabinetModal');
     } else {
-      alert('Неверный ответ на родительский барьер!');
+      alert('Неверный ответ!');
     }
   }
 
   function rewardChildFromAdult() {
     state.balance += 50;
     updateUI();
-    alert('Ребёнку успешно начислено поощрение +50 монет за финансовые успехи!');
+    alert('Поощрение +50 монет зачислено!');
   }
 
   function resetDemoProfile() {
-    if (confirm('Сбросить весь прогресс тестового профиля к началу?')) {
+    if (confirm('Сбросить весь прогресс тестового профиля?')) {
       state.stage = 1;
       state.period = 1;
       state.balance = 350;
       state.savings = 100;
       state.satiety = 80;
       state.mood = 85;
+      state.factSpend = { mandatory: 0, optional: 0, savings: 0 };
       state.stats = { mandatoryBought: 0, questsCompleted: 0, mistakesHandled: 0 };
       closeModal('adultCabinetModal');
       renderQuests();
       updateUI();
-      showResult('Профиль сброшен! 🔄', 'Тестовый профиль готов к повторной экспертной проверке с Шага 1.', '✨');
+      showResult('Профиль сброшен! 🔄', 'Готово к повторному тесту с Шага 1.', '✨');
     }
   }
 
@@ -666,17 +773,6 @@
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     btn.classList.add('active');
-  }
-
-  function openBudgetModal() {
-    document.getElementById('budgetTotalCap').innerText = state.balance + ' монет';
-    recalcBudget();
-    openModal('budgetModal');
-  }
-
-  function openDepositModal() { openModal('depositModal'); }
-  function showHelpModal() {
-    showResult('Как играть в Финни? 💡', '1. Следи за сытостью и настроением питомца.\n2. Распределяй доход на 3 корзины: нужное, желаемое и копилку.\n3. Решай квесты и расти вместе с Финни!', '🎓');
   }
 
   function showResult(title, desc, icon) {
@@ -693,4 +789,3 @@
 </script>
 </body>
 </html>
-
