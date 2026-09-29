@@ -40,11 +40,17 @@
     .balance-item h3 { font-size: 19px; font-weight: 800; margin-top: 2px; }
     .balance-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.2); }
 
-    /* 2D Персонаж с лапками */
-    .pet-stage-area { padding: 10px 16px 4px; text-align: center; }
-    .pet-svg-box { width: 150px; height: 150px; margin: 0 auto 6px; position: relative; display: flex; align-items: center; justify-content: center; animation: petBob 3s ease-in-out infinite; }
+    /* 2D Персонаж */
+    .pet-stage-area { padding: 10px 16px 4px; text-align: center; position: relative; }
+    .pet-svg-box { width: 150px; height: 150px; margin: 0 auto 6px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: petBob 3s ease-in-out infinite; }
     @keyframes petBob { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.02); } }
+    .pet-svg-box.pet-pat-anim { animation: petPat 0.4s ease-in-out; }
+    @keyframes petPat { 0% { transform: scale(1); } 50% { transform: scale(1.12) rotate(4deg); } 100% { transform: scale(1); } }
     .pet-svg-box svg { width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.12)); }
+    
+    .floating-heart { position: absolute; font-size: 26px; pointer-events: none; animation: floatUp 0.8s forwards; }
+    @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(0.8); } 100% { opacity: 0; transform: translateY(-50px) scale(1.3); } }
+
     .pet-badge { display: inline-block; background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 12px; border: 2px solid #fff; margin-bottom: 6px; }
     .pet-speech { background: #F3F4F6; border-radius: 16px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #374151; display: inline-block; margin-bottom: 8px; max-width: 92%; }
 
@@ -71,6 +77,11 @@
     .btn-deposit { background: #4F46E5; color: #fff; border: none; padding: 6px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
     .btn-withdraw { background: #E0E7FF; color: #3730A3; border: none; padding: 6px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; }
 
+    /* Панель жизней/попыток в заданиях */
+    .attempts-bar { background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 14px; padding: 8px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .attempts-title { font-size: 12px; font-weight: 800; color: #BE123C; }
+    .hearts-row { font-size: 16px; letter-spacing: 2px; }
+
     /* Вкладки */
     .nav-tabs { display: flex; border-top: 1px solid #EEF2F6; background: #fff; position: sticky; bottom: 0; z-index: 30; }
     .tab-btn { flex: 1; padding: 10px 0 12px; border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; }
@@ -81,7 +92,7 @@
     .tab-content.active { display: block; }
     .section-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; }
 
-    /* Сетка товаров */
+    /* Товары */
     .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .shop-item { background: #fff; border: 1.5px solid #F3F4F6; border-radius: 16px; padding: 10px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
     .shop-item.mandatory { border-color: #DEF7EC; background: #FDFEFE; }
@@ -100,7 +111,21 @@
     .quest-title { font-size: 13px; font-weight: 700; margin: 4px 0; }
     .btn-quest-start { background: var(--primary-dark); color: #fff; border: none; padding: 7px 12px; border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; }
 
-    /* Модалки и Онбординг */
+    /* Полноэкранный Онбординг (Вся страница перекрыта) */
+    .fullscreen-onboard { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #FFFFFF; z-index: 1000; flex-direction: column; justify-content: space-between; padding: 32px 24px 20px; box-sizing: border-box; overflow-y: auto; }
+    .fullscreen-onboard.active { display: flex; }
+    .onboard-content-wrap { max-width: 440px; margin: 0 auto; width: 100%; text-align: center; }
+    .onboarding-screen { display: none; text-align: center; }
+    .onboarding-screen.active { display: block; }
+    .onboard-icon { font-size: 72px; margin-bottom: 12px; }
+    .onboard-badge { display: inline-block; padding: 4px 12px; background: #EEF2FF; color: #4F46E5; border-radius: 10px; font-size: 11px; font-weight: 800; margin-bottom: 10px; }
+    .onboard-title { font-size: 22px; font-weight: 900; color: var(--primary-dark); margin-bottom: 10px; line-height: 1.2; }
+    .onboard-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+    
+    /* Авторская строчка внизу экрана */
+    .author-tag { font-size: 11px; font-weight: 700; color: #9CA3AF; text-align: center; letter-spacing: 0.3px; padding-top: 14px; border-top: 1px dashed #E5E7EB; width: 100%; }
+
+    /* Обычные модалки */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; padding: 16px; }
     .modal-overlay.active { display: flex; }
     .modal-box { background: #fff; border-radius: 24px; padding: 20px; width: 100%; max-width: 400px; text-align: center; max-height: 92vh; overflow-y: auto; }
@@ -113,14 +138,75 @@
     .customizer-row { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
     .chip { padding: 7px 12px; border: 1.5px solid #E5E7EB; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
     .chip.active { border-color: var(--primary); background: #FFF0F5; color: var(--primary); }
-
-    /* Онбординг экраны */
-    .onboarding-screen { display: none; text-align: center; }
-    .onboarding-screen.active { display: block; }
-    .onboard-badge { display: inline-block; padding: 4px 10px; background: #EEF2FF; color: #4F46E5; border-radius: 8px; font-size: 10px; font-weight: 800; margin-bottom: 8px; }
   </style>
 </head>
 <body>
+
+<!-- ПОЛНОЭКРАННОЕ ПРИВЕТСТВИЕ И СОЗДАНИЕ ПЕРСОНАЖА -->
+<div class="fullscreen-onboard" id="fullscreenOnboard">
+  <div class="onboard-content-wrap">
+    
+    <!-- Экран 1: Вводная часть -->
+    <div class="onboarding-screen active" id="onboardStep1">
+      <div class="onboard-icon">🌟</div>
+      <span class="onboard-badge">ЛИДЕРЫ ЦИФРОВОЙ ТРАНСФОРМАЦИИ</span>
+      <h2 class="onboard-title">Привет, юный финансист!</h2>
+      <p class="onboard-desc">
+        Добро пожаловать в игру <b>«Питомец Финни»</b>!<br><br>
+        Здесь у тебя появится свой собственный виртуальный друг. Заботясь о нём, ты на простых примерах научишься распоряжаться карманными деньгами, копить на мечту и принимать взрослые финансовые решения без риска!
+      </p>
+      <button class="btn-primary" style="padding:14px; font-size:15px;" onclick="nextOnboardStep(2)">Чему я научусь? ➡️</button>
+    </div>
+
+    <!-- Экран 2: Правило 3 корзин -->
+    <div class="onboarding-screen" id="onboardStep2">
+      <div class="onboard-icon">🧺</div>
+      <span class="onboard-badge">ОСНОВА ФИНГРАМОТНОСТИ</span>
+      <h2 class="onboard-title">«Правило 3 корзин»</h2>
+      <p class="onboard-desc" style="text-align: left; background:#F9FAFB; padding:14px; border-radius:16px;">
+        Каждый раз, получая доход, мы делим его с умом:<br><br>
+        <b>1. 🍖 Обязательные расходы:</b> полезная еда и здоровье питомца (это покупаем всегда в первую очередь!).<br><br>
+        <b>2. 🏦 Накопления в копилку:</b> регулярная сумма на большую цель (велосипед или самокат).<br><br>
+        <b>3. 🎮 Необязательные желания:</b> игрушки, украшения и сладости для веселья!
+      </p>
+      <button class="btn-primary" style="padding:14px; font-size:15px;" onclick="nextOnboardStep(3)">Выбрать питомца 🐾</button>
+    </div>
+
+    <!-- Экран 3: Кастомизация питомца -->
+    <div class="onboarding-screen" id="onboardStep3">
+      <div class="onboard-icon">🎨</div>
+      <span class="onboard-badge">СОЗДАНИЕ ДРУГА</span>
+      <h2 class="onboard-title">Познакомься со своим питомцем:</h2>
+      
+      <p style="font-size:11px; font-weight:800; color:var(--text-muted); margin:8px 0 4px;">КТО БУДЕТ ТВОИМ ДРУГОМ?</p>
+      <div class="customizer-row">
+        <div class="chip active" onclick="selectPetTypeOnboard('fox', this)">Лисёнок 🦊</div>
+        <div class="chip" onclick="selectPetTypeOnboard('cat', this)">Котёнок 🐱</div>
+        <div class="chip" onclick="selectPetTypeOnboard('dog', this)">Щенок 🐶</div>
+      </div>
+
+      <p style="font-size:11px; font-weight:800; color:var(--text-muted); margin:8px 0 4px;">ВЫБЕРИ АКСЕССУАР:</p>
+      <div class="customizer-row">
+        <div class="chip active" onclick="selectPetAccOnboard('none', this)">Без всего</div>
+        <div class="chip" onclick="selectPetAccOnboard('bow', this)">Бантик 🎀</div>
+        <div class="chip" onclick="selectPetAccOnboard('hat', this)">Шляпка 🎩</div>
+      </div>
+
+      <p style="font-size:11px; font-weight:800; color:var(--text-muted); margin:8px 0 4px;">ИМЯ ДЛЯ ПИТОМЦА:</p>
+      <input type="text" id="onboardPetNameInput" value="Финни" placeholder="Введи имя" style="width:85%; padding:10px; border:1.5px solid #D1D5DB; border-radius:12px; text-align:center; font-weight:800; font-size:15px; margin-bottom:18px;">
+
+      <button class="btn-primary" style="padding:14px; font-size:15px;" onclick="finishOnboarding()">Начать игру! 🚀</button>
+    </div>
+
+  </div>
+
+  <!-- Обязательная авторская строчка в самом низу -->
+  <div class="author-tag">
+    Ученики МАОУ ДОД Доминанта корпус 2
+  </div>
+</div>
+
+<!-- ОСНОВНОЙ ИНТЕРФЕЙС ПРИЛОЖЕНИЯ -->
 <div class="app-container">
   <!-- Шапка -->
   <header>
@@ -132,6 +218,7 @@
       </div>
     </div>
     <div class="header-actions">
+      <button class="btn-icon" title="Настроить образ" onclick="openPetCustomizer()">🎨</button>
       <button class="btn-icon" title="Справочник терминов" onclick="openDictionaryModal()">📚</button>
       <button class="btn-icon" title="Родительский контроль" onclick="openAdultGate()">🛡️</button>
     </div>
@@ -164,13 +251,17 @@
   <!-- Вкладка 1: Питомец -->
   <div class="tab-content active" id="tab-home">
     <div class="pet-stage-area">
-      <div class="pet-speech" id="petSpeechBubble">«Привет! Нажми на меня, чтобы изменить имя или наряд!»</div>
+      <div class="pet-speech" id="petSpeechBubble">«Погладь меня ладошкой по пузику! Я очень люблю ласку ❤️»</div>
       
-      <!-- 2D Персонаж (Вектор с сидячими лапками) -->
-      <div class="pet-svg-box" id="petSvgBox" onclick="openPetCustomizer()">
-        <!-- SVG генерируется динамически через renderPetSVG() -->
+      <!-- 2D Персонаж (Клик = поглаживание) -->
+      <div class="pet-svg-box" id="petSvgBox" onclick="patPet(event)">
+        <!-- SVG генерируется динамически -->
       </div>
       <div><span class="pet-badge" id="petMoodBadge">Любознательный 🐾</span></div>
+      
+      <div style="font-size:11px; color:#6B7280; font-weight:600; margin-bottom:6px;">
+        👆 Нажми на питомца, чтобы погладить его!
+      </div>
     </div>
 
     <!-- Шкалы -->
@@ -220,12 +311,19 @@
     <div class="shop-grid" id="shopGridContainer"></div>
   </div>
 
-  <!-- Вкладка 3: Финансовые уроки (6 квестов) -->
+  <!-- Вкладка 3: Финансовые уроки с жизнями/попытками -->
   <div class="tab-content" id="tab-quests">
     <div class="section-title">
       <span>Финансовые ситуации</span>
       <span style="font-size: 11px; color: var(--text-muted);">3 ключевые темы</span>
     </div>
+
+    <!-- Панель попыток (жизней) -->
+    <div class="attempts-bar">
+      <span class="attempts-title">Твои попытки:</span>
+      <div class="hearts-row" id="heartsRowContainer">❤️❤️❤️</div>
+    </div>
+
     <div id="questsContainer"></div>
   </div>
 
@@ -240,7 +338,7 @@
       <h4 style="font-size:13px; font-weight:700;">🌱 Рост питомца</h4>
       <p style="font-size:11px; color:#4B5563; margin-top:4px;">Финни растет за серию периодов (Малыш → Подросток → Взрослый), если обязательный план выполнен, а накопления пополняются регулярно.</p>
     </div>
-    <button class="btn-secondary" onclick="resetDemoProfile()">Сбросить всё (Новая игра)</button>
+    <button class="btn-secondary" onclick="resetDemoProfile()">Сбросить всё (Пройти заново)</button>
   </div>
 
   <!-- Нижняя панель -->
@@ -254,66 +352,10 @@
 
 <!-- ================= МОДАЛКИ ================= -->
 
-<!-- 1. Вводный онбординг (Приветствие и обучение) -->
-<div class="modal-overlay" id="onboardingModal">
-  <div class="modal-box">
-    <!-- Шаг 1: Приветствие -->
-    <div class="onboarding-screen active" id="onboardStep1">
-      <div class="modal-icon">🌟</div>
-      <span class="onboard-badge">ДОБРО ПОЖАЛОВАТЬ!</span>
-      <h3 class="modal-title">Привет, юный финансист!</h3>
-      <p class="modal-desc">
-        В этой игре у тебя появится собственный виртуальный друг. Заботясь о нём, ты легко научишься управлять карманными деньгами как взрослый!
-      </p>
-      <button class="btn-primary" onclick="nextOnboardStep(2)">Чему я научусь? ➡️</button>
-    </div>
-
-    <!-- Шаг 2: Правило 3 корзин -->
-    <div class="onboarding-screen" id="onboardStep2">
-      <div class="modal-icon">🧺</div>
-      <span class="onboard-badge">ГЛАВНЫЙ СЕКРЕТ</span>
-      <h3 class="modal-title">«Правило 3 корзин»</h3>
-      <p class="modal-desc" style="text-align: left;">
-        Каждый раз, получая монеты, мы делим их:<br><br>
-        1. <b>🍖 Обязательное:</b> вкусная еда и здоровье питомца.<br>
-        2. <b>🏦 Копилка:</b> регулярный шаг к большой мечте.<br>
-        3. <b>🎮 Желания:</b> игрушки и сладости для радости!
-      </p>
-      <button class="btn-primary" onclick="nextOnboardStep(3)">Создать питомца 🐾</button>
-    </div>
-
-    <!-- Шаг 3: Создание персонажа (имя и вид) -->
-    <div class="onboarding-screen" id="onboardStep3">
-      <div class="modal-icon">🎨</div>
-      <span class="onboard-badge">ТВОЙ ДРУГ</span>
-      <h3 class="modal-title">Выбери питомца:</h3>
-      
-      <p style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px;">ПЕРСОНАЖ:</p>
-      <div class="customizer-row">
-        <div class="chip active" onclick="selectPetTypeOnboard('fox', this)">Лисёнок 🦊</div>
-        <div class="chip" onclick="selectPetTypeOnboard('cat', this)">Котёнок 🐱</div>
-        <div class="chip" onclick="selectPetTypeOnboard('dog', this)">Щенок 🐶</div>
-      </div>
-
-      <p style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px;">АКСЕССУАР:</p>
-      <div class="customizer-row">
-        <div class="chip active" onclick="selectPetAccOnboard('none', this)">Без всего</div>
-        <div class="chip" onclick="selectPetAccOnboard('bow', this)">Бантик 🎀</div>
-        <div class="chip" onclick="selectPetAccOnboard('hat', this)">Шляпка 🎩</div>
-      </div>
-
-      <p style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px;">КАК НАЗОВЁМ?</p>
-      <input type="text" id="onboardPetNameInput" value="Финни" placeholder="Имя питомца" style="width:80%; padding:8px; border:1.5px solid #D1D5DB; border-radius:10px; text-align:center; font-weight:700; margin-bottom:14px;">
-
-      <button class="btn-primary" onclick="finishOnboarding()">Начать приключение! 🚀</button>
-    </div>
-  </div>
-</div>
-
-<!-- 2. Кастомизация питомца (смена в любой момент) -->
+<!-- Кастомизация питомца -->
 <div class="modal-overlay" id="customizerModal">
   <div class="modal-box">
-    <h3 class="modal-title">Настройка питомца</h3>
+    <h3 class="modal-title">Настройка образа</h3>
     <p class="modal-desc">Выбери вид питомца, аксессуар и измени имя:</p>
     <input type="text" id="inputPetName" value="Финни" style="width:80%; padding:8px; border:1px solid #D1D5DB; border-radius:10px; text-align:center; font-weight:700; margin-bottom:10px;">
     
@@ -335,7 +377,7 @@
   </div>
 </div>
 
-<!-- 3. Выбор цели накоплений -->
+<!-- Выбор цели накоплений -->
 <div class="modal-overlay" id="goalModal">
   <div class="modal-box">
     <h3 class="modal-title">Выбор цели накопления</h3>
@@ -349,7 +391,7 @@
   </div>
 </div>
 
-<!-- 4. Снятие средств с цели -->
+<!-- Снятие средств с цели -->
 <div class="modal-overlay" id="withdrawModal">
   <div class="modal-box">
     <div class="modal-icon">⚠️</div>
@@ -363,7 +405,7 @@
   </div>
 </div>
 
-<!-- 5. Справочник терминов -->
+<!-- Справочник терминов -->
 <div class="modal-overlay" id="dictionaryModal">
   <div class="modal-box" style="text-align:left;">
     <h3 class="modal-title" style="text-align:center;">📚 Справочник терминов</h3>
@@ -375,7 +417,7 @@
   </div>
 </div>
 
-<!-- 6. Бюджет 3 корзины -->
+<!-- Бюджет 3 корзины -->
 <div class="modal-overlay" id="budgetModal">
   <div class="modal-box">
     <div class="modal-icon">⚖️</div>
@@ -399,7 +441,7 @@
   </div>
 </div>
 
-<!-- 7. Модалка задания -->
+<!-- Модалка задания -->
 <div class="modal-overlay" id="questModal">
   <div class="modal-box">
     <div class="modal-icon" id="qModalIcon">💡</div>
@@ -409,7 +451,7 @@
   </div>
 </div>
 
-<!-- 8. Модалка результата -->
+<!-- Модалка результата -->
 <div class="modal-overlay" id="resultModal">
   <div class="modal-box">
     <div class="modal-icon" id="resIcon">🎉</div>
@@ -419,7 +461,7 @@
   </div>
 </div>
 
-<!-- 9. Модалка депозита -->
+<!-- Модалка депозита -->
 <div class="modal-overlay" id="depositModal">
   <div class="modal-box">
     <div class="modal-icon">🏦</div>
@@ -434,7 +476,7 @@
   </div>
 </div>
 
-<!-- 10. Родительский барьер -->
+<!-- Родительский барьер -->
 <div class="modal-overlay" id="adultGateModal">
   <div class="modal-box">
     <div class="modal-icon">🔒</div>
@@ -446,7 +488,7 @@
   </div>
 </div>
 
-<!-- 11. Кабинет взрослого -->
+<!-- Кабинет взрослого -->
 <div class="modal-overlay" id="adultCabinetModal">
   <div class="modal-box" style="text-align:left;">
     <h3 class="modal-title" style="text-align:center;">🛡️ Родительский кабинет</h3>
@@ -464,7 +506,7 @@
 </div>
 
 <script>
-  // Синтезатор звука звона монет (Web Audio API)
+  // 1. Звук монет (Web Audio API)
   function playCoinSound() {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -474,7 +516,6 @@
       gain.connect(audioCtx.destination);
       
       osc.type = 'sine';
-      // Звонкий высокий тон монетки
       osc.frequency.setValueAtTime(987.77, audioCtx.currentTime); // B5
       osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.08); // E6
       
@@ -483,13 +524,31 @@
       
       osc.start();
       osc.stop(audioCtx.currentTime + 0.35);
-    } catch(e) {
-      console.log('Audio not supported or blocked');
-    }
+    } catch(e) {}
+  }
+
+  // 2. Звук поглаживания питомца (мягкий уютный перелив)
+  function playPurrSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(329.63, audioCtx.currentTime); // E4
+      osc.frequency.linearRampToValueAtTime(440.00, audioCtx.currentTime + 0.15); // A4
+      
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    } catch(e) {}
   }
 
   const state = {
-    firstLaunchDone: false,
     petName: 'Финни',
     petType: 'fox', // fox, cat, dog
     petAcc: 'none', // none, bow, hat
@@ -502,6 +561,7 @@
     goalIcon: '🚲',
     satiety: 80,
     mood: 85,
+    lives: 3, // Попытки/жизни в квестах
     budgetPlan: { mandatory: 150, optional: 100, savings: 100 },
     factSpend: { mandatory: 0, optional: 0, savings: 0 },
     stats: { mandatoryBought: 0, questsCompleted: 0, mistakesHandled: 0 },
@@ -523,42 +583,75 @@
     {
       id: 'q1', topic: 'Планирование бюджета', title: 'Карманные деньги на неделю',
       desc: 'Тебе выдали 100 монет на всю неделю. Друг зовёт сразу купить огромную сладкую вату за 90 монет. Что решишь?',
-      optA: { text: 'Купить сладость на все монеты', correct: false, comment: 'Ой! На сладость ушли почти все монеты, и на обеды ничего не осталось. Разделяй бюджет заранее!' },
+      optA: { text: 'Купить сладость на все монеты', correct: false, comment: 'Ой! На сладость ушли почти все монеты, и на обеды ничего не осталось. Теряется 1 попытка ❤️!' },
       optB: { text: 'Купить маленькую за 30, а 70 отложить', correct: true, reward: 40, comment: 'Супер! Ты и полакомился, и сберёг монеты на важные вещи.' }
     },
     {
       id: 'q2', topic: 'Формирование накоплений', title: 'Сдача в магазине',
       desc: 'После покупки корма осталась сдача 30 монет. Как поступить?',
       optA: { text: 'Бросить в копилку на цель', correct: true, reward: 30, comment: 'Отлично! Регулярные маленькие суммы быстрее всего приближают к большой цели.' },
-      optB: { text: 'Купить случайную наклейку у кассы', correct: false, comment: 'Наклейка быстро потерялась, а мечта осталась дальше. Лучше копить!' }
+      optB: { text: 'Купить случайную наклейку у кассы', correct: false, comment: 'Наклейка быстро потерялась, а мечта осталась дальше. Теряется 1 попытка ❤️!' }
     },
     {
       id: 'q3', topic: 'Платежи и покупки', title: 'Поход в магазин со списком',
       desc: 'Ты пришёл за кормом со списком. На витрине мерцает яркая светящаяся шапка.',
       optA: { text: 'Сначала купить корм по списку', correct: true, reward: 35, comment: 'Отличная финансовая дисциплина! Обязательные расходы всегда идут первыми.' },
-      optB: { text: 'Взять шапку, а корм как-нибудь потом', correct: false, comment: 'Питомец остался голодным, так как на корм не хватило монет. Список покупок бережёт бюджет!' }
+      optB: { text: 'Взять шапку, а корм как-нибудь потом', correct: false, comment: 'Питомец остался голодным, так как на корм не хватило монет. Теряется 1 попытка ❤️!' }
     },
     {
       id: 'q4', topic: 'Планирование бюджета', title: 'Непредвиденные расходы',
       desc: 'У питомца сломался ошейник. Это непредвиденный, но обязательный расход (50 монет).',
       optA: { text: 'Отказаться от необязательной игрушки', correct: true, reward: 45, comment: 'Мудрый выбор! Жертвовать развлечениями ради необходимого — признак финансовой зрелости.' },
-      optB: { text: 'Разбить всю копилку', correct: false, comment: 'Копилку лучше беречь для главной цели. Сначала сокращают развлечения текущего периода.' }
+      optB: { text: 'Разбить всю копилку', correct: false, comment: 'Копилку лучше беречь для главной цели. Теряется 1 попытка ❤️!' }
     },
     {
       id: 'q5', topic: 'Формирование накоплений', title: 'Подарок на праздник',
       desc: 'Тебе подарили 150 монет. Как распределить такой большой доход?',
       optA: { text: '50% в копилку, 30% на питомца, 20% на радости', correct: true, reward: 50, comment: 'Золотое правило распределения доходов! Питомец доволен, а цель совсем близко.' },
-      optB: { text: 'Потратить всё за 5 минут', correct: false, comment: 'Деньги растаяли как дым. Подарки приносят пользу, если часть отложить.' }
+      optB: { text: 'Потратить всё за 5 минут', correct: false, comment: 'Деньги растаяли как дым. Теряется 1 попытка ❤️!' }
     },
     {
       id: 'q6', topic: 'Платежи и покупки', title: 'Сравнение цен',
       desc: 'В одном магазине любимый корм стоит 60 монет, а в соседнем со скидкой — 40 монет.',
       optA: { text: 'Дойти до соседнего и сберечь 20 монет', correct: true, reward: 40, comment: 'Умный покупатель всегда сравнивает цены! Сэкономленные 20 монет сохранены в кошельке.' },
-      optB: { text: 'Купить сразу в первом, лень идти', correct: false, comment: 'Переплата на ровном месте. Сравнение цен экономит до трети бюджета!' }
+      optB: { text: 'Купить сразу в первом, лень идти', correct: false, comment: 'Переплата на ровном месте. Теряется 1 попытка ❤️!' }
     }
   ];
 
-  // Генератор двумерного SVG-питомца с лапками и аксессуарами
+  // Поглаживание питомца (мурлыканье, сердечко, +настроение)
+  function patPet(event) {
+    const box = document.getElementById('petSvgBox');
+    box.classList.remove('pet-pat-anim');
+    void box.offsetWidth;
+    box.classList.add('pet-pat-anim');
+
+    // Звук
+    playPurrSound();
+
+    // Рост настроения
+    state.mood = Math.min(100, state.mood + 5);
+    updateUI();
+
+    // Создание вылетающего сердечка в точке клика
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerText = '❤️';
+    const rect = box.getBoundingClientRect();
+    heart.style.left = (event.clientX - rect.left - 10) + 'px';
+    heart.style.top = (event.clientY - rect.top - 20) + 'px';
+    box.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 800);
+
+    const happyQuotes = [
+      '«Муррр! Как приятно! Спасибо за заботу! ❤️»',
+      '«Ура! Моё настроение поднялось до небес! ✨»',
+      '«Ты самый заботливый хозяин на свете! 🐾»'
+    ];
+    document.getElementById('petSpeechBubble').innerText = happyQuotes[Math.floor(Math.random() * happyQuotes.length)];
+  }
+
+  // 2D SVG Персонаж с лапками
   function renderPetSVG(type, acc, stage) {
     let mainColor = '#FF8A00'; // Fox
     let earColor = '#E05300';
@@ -574,18 +667,15 @@
 
     let scale = (stage === 1) ? 0.85 : (stage === 2) ? 1.0 : 1.15;
 
-    // Векторные аксессуары
     let accSvg = '';
     if (acc === 'bow') {
       accSvg = `
-        <!-- Бантик на шее -->
         <path d="M 60 115 L 45 105 L 45 125 Z" fill="#FF0053"/>
         <path d="M 80 115 L 95 105 L 95 125 Z" fill="#FF0053"/>
         <circle cx="70" cy="115" r="6" fill="#D90429"/>
       `;
     } else if (acc === 'hat') {
       accSvg = `
-        <!-- Цилиндр / Шляпка -->
         <rect x="52" y="10" width="36" height="26" rx="4" fill="#310F53"/>
         <rect x="42" y="34" width="56" height="6" rx="3" fill="#520978"/>
         <rect x="52" y="30" width="36" height="4" fill="#FF0053"/>
@@ -595,47 +685,36 @@
     return `
       <svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg">
         <g transform="scale(${scale}) translate(${(140 - 140*scale)/2}, ${(150 - 150*scale)})">
-          <!-- Полянка / тень -->
           <ellipse cx="70" cy="140" rx="48" ry="8" fill="#E2E8F0"/>
-          
-          <!-- Ушки -->
           <polygon points="32,25 52,65 24,60" fill="${earColor}"/>
           <polygon points="36,34 48,62 30,58" fill="#FCE7F3"/>
           <polygon points="108,25 88,65 116,60" fill="${earColor}"/>
           <polygon points="104,34 92,62 110,58" fill="#FCE7F3"/>
           
-          <!-- Хвостик сбоку -->
           <path d="M 100 110 C 130 115 135 75 115 70 C 110 85 105 100 100 110 Z" fill="${mainColor}"/>
           <path d="M 124 73 C 130 85 120 95 110 100 C 115 90 120 80 124 73 Z" fill="#FFFFFF"/>
 
-          <!-- Тельце (сидячее положение) -->
           <ellipse cx="70" cy="108" rx="38" ry="32" fill="${mainColor}"/>
-          <!-- Животик -->
           <ellipse cx="70" cy="112" rx="22" ry="20" fill="#FFFFFF"/>
 
-          <!-- Задние лапки (сидит) -->
+          <!-- Задние сидячие лапки -->
           <ellipse cx="36" cy="132" rx="14" ry="8" fill="${mainColor}"/>
           <ellipse cx="104" cy="132" rx="14" ry="8" fill="${mainColor}"/>
-          <!-- Подушечки задних лапок -->
           <circle cx="36" cy="132" r="4" fill="#FECDD3"/>
           <circle cx="104" cy="132" r="4" fill="#FECDD3"/>
 
-          <!-- Голова -->
           <ellipse cx="70" cy="68" rx="36" ry="30" fill="${mainColor}"/>
-          <!-- Белые щечки -->
           <path d="M 40 70 Q 70 85 70 85 Q 70 85 100 70 Q 105 85 70 95 Q 35 85 40 70 Z" fill="#FFFFFF"/>
           
-          <!-- Глазки -->
           <circle cx="56" cy="62" r="5" fill="${eyeColor}"/>
           <circle cx="58" cy="60" r="1.8" fill="#FFFFFF"/>
           <circle cx="84" cy="62" r="5" fill="${eyeColor}"/>
           <circle cx="86" cy="60" r="1.8" fill="#FFFFFF"/>
 
-          <!-- Носик и улыбка -->
           <polygon points="67,73 73,73 70,77" fill="#1C1D22"/>
           <path d="M 66 79 Q 70 82 74 79" stroke="#1C1D22" stroke-width="1.8" fill="none" stroke-linecap="round"/>
 
-          <!-- Передние сидячие лапки с пальчиками -->
+          <!-- Передние лапки с подушечками -->
           <g>
             <rect x="52" y="112" width="12" height="24" rx="6" fill="${mainColor}"/>
             <circle cx="55" cy="133" r="2" fill="#E05300"/>
@@ -648,7 +727,6 @@
             <circle cx="85" cy="133" r="2" fill="#E05300"/>
           </g>
 
-          <!-- Аксессуар -->
           ${accSvg}
         </g>
       </svg>
@@ -660,10 +738,9 @@
     renderQuests();
     updateUI();
 
-    // Проверка первого запуска для онбординга
-    const saved = localStorage.getItem('finny_onboarded');
+    const saved = localStorage.getItem('finny_onboarded_v2');
     if (!saved) {
-      openModal('onboardingModal');
+      document.getElementById('fullscreenOnboard').classList.add('active');
     }
   }
 
@@ -686,11 +763,11 @@
 
   function finishOnboarding() {
     state.petName = document.getElementById('onboardPetNameInput').value || 'Финни';
-    localStorage.setItem('finny_onboarded', 'true');
-    closeModal('onboardingModal');
+    localStorage.setItem('finny_onboarded_v2', 'true');
+    document.getElementById('fullscreenOnboard').classList.remove('active');
     playCoinSound();
     updateUI();
-    showResult('Ура, игра началась! 🎉', `Твой питомец ${state.petName} готов учиться финансовой грамотности! Тебе начислен стартовый бюджет 350 монет.`, '🪙');
+    showResult('Ура, игра началась! 🎉', `Твой питомец ${state.petName} ждёт тебя! Мы начислили стартовый баланс 350 монет.`, '🪙');
   }
 
   function updateUI() {
@@ -705,7 +782,14 @@
     document.getElementById('goalIcon').innerText = state.goalIcon;
     document.getElementById('goalTitle').innerText = state.goalTitle + ' (Сменить ▾)';
     
-    // Отрисовка 2D питомца с лапками
+    // Отрисовка попыток/жизней
+    let heartsStr = '';
+    for (let i = 0; i < 3; i++) {
+      heartsStr += (i < state.lives) ? '❤️' : '🤍';
+    }
+    document.getElementById('heartsRowContainer').innerText = heartsStr;
+
+    // Отрисовка 2D SVG питомца
     document.getElementById('petSvgBox').innerHTML = renderPetSVG(state.petType, state.petAcc, state.stage);
     document.getElementById('miniPetAvatar').innerText = (state.petType === 'fox') ? '🦊' : (state.petType === 'cat') ? '🐱' : '🐶';
 
@@ -713,7 +797,7 @@
     const periodsRem = Math.ceil(rem / 100);
     document.getElementById('goalProgressText').innerText = `${state.savings} из ${state.goalCost} 🪙 (~${periodsRem} пер.)`;
 
-    // Стадии развития питомца (п. 2.5.10 ТЗ)
+    // Стадии развития
     if (state.period >= 4) {
       state.stage = 3;
       document.getElementById('headerPetStage').innerText = 'Взрослый (Период ' + state.period + ')';
@@ -801,6 +885,10 @@
   }
 
   function openQuest(id) {
+    if (state.lives <= 0) {
+      showResult('Закончились попытки! 💔', 'Ты исчерпал все 3 жизни в заданиях. Финни советует отдохнуть или перейти к следующему периоду!', '🛌');
+      return;
+    }
     const q = quests.find(x => x.id === id);
     if (!q) return;
     document.getElementById('qModalTitle').innerText = q.title;
@@ -820,7 +908,7 @@
     if (opt.correct) {
       state.balance += opt.reward || 30;
       state.stats.questsCompleted++;
-      playCoinSound(); // Звук монет!
+      playCoinSound(); // Звон монет
       showResult('Верно! 🎯', opt.comment + ` Начислено +${opt.reward || 30} 🪙!`, '🌟');
       const card = document.getElementById('card-' + id);
       if (card) {
@@ -830,7 +918,8 @@
       }
     } else {
       state.stats.mistakesHandled++;
-      showResult('Урок усвоен! 📖', opt.comment, '💡');
+      state.lives = Math.max(0, state.lives - 1);
+      showResult('Урок усвоен! 📖', opt.comment + ` Осталось попыток: ${state.lives} ❤️`, '💔');
     }
     updateUI();
   }
@@ -842,12 +931,13 @@
     }
     state.period++;
     state.balance += 200;
-    playCoinSound(); // Звук монет при получении дохода за период
+    state.lives = 3; // Восстановление попыток в новом периоде!
+    playCoinSound();
     state.factSpend = { mandatory: 0, optional: 0, savings: 0 };
     state.satiety = Math.max(30, state.satiety - 25);
     state.mood = Math.max(30, state.mood - 20);
     updateUI();
-    showResult(`Новый период #${state.period}! ☀️`, `Тебе начислен доход +200 монет! Не забудь обеспечить обязательные траты.`, '📅');
+    showResult(`Новый период #${state.period}! ☀️`, `Тебе начислен доход +200 монет! Попытки для заданий восстановлены (❤️❤️❤️).`, '📅');
   }
 
   function depositSavings(amt) {
@@ -858,7 +948,7 @@
     state.balance -= amt;
     state.savings += amt;
     state.factSpend.savings += amt;
-    playCoinSound(); // Звук монетки в копилку
+    playCoinSound();
     closeModal('depositModal');
     updateUI();
     if (state.savings >= state.goalCost) {
@@ -973,26 +1063,27 @@
 
   function rewardChildFromAdult() {
     state.balance += 50;
-    playCoinSound(); // Звук начисления монет
+    playCoinSound();
     updateUI();
     alert('Поощрение +50 монет зачислено!');
   }
 
   function resetDemoProfile() {
     if (confirm('Сбросить весь прогресс тестового профиля?')) {
-      localStorage.removeItem('finny_onboarded');
+      localStorage.removeItem('finny_onboarded_v2');
       state.stage = 1;
       state.period = 1;
       state.balance = 350;
       state.savings = 100;
       state.satiety = 80;
       state.mood = 85;
+      state.lives = 3;
       state.factSpend = { mandatory: 0, optional: 0, savings: 0 };
       state.stats = { mandatoryBought: 0, questsCompleted: 0, mistakesHandled: 0 };
       closeModal('adultCabinetModal');
       renderQuests();
       updateUI();
-      openModal('onboardingModal');
+      document.getElementById('fullscreenOnboard').classList.add('active');
       nextOnboardStep(1);
     }
   }
